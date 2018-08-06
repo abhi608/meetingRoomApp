@@ -1,8 +1,6 @@
 package com.visa.prj.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,16 +9,14 @@ import javax.persistence.Table;
 public class Admin {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private String email;
 
 	private String name;
-	private String email;
+
 	private String password;
 	private boolean status;
 
-	public Admin(int id, String name, String email, String password, boolean status) {
-		this.id = id;
+	public Admin(String name, String email, String password, boolean status) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
@@ -30,11 +26,7 @@ public class Admin {
 	public Admin() {
 	}
 
-	
 
-	public int getId() {
-		return id;
-	}
 
 	public boolean isStatus() {
 		return status;
@@ -44,9 +36,6 @@ public class Admin {
 		this.status = status;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;

@@ -128,4 +128,4 @@ public class Equipment {
 				+ ", versionNo=" + versionNo + "]";
 	}
 	
-}s
+}

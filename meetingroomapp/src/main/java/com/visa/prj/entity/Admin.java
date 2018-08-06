@@ -17,19 +17,31 @@ public class Admin {
 	private String name;
 	private String email;
 	private String password;
+	private boolean status;
 
-	public Admin() {
-	}
-
-	public Admin(int id, String name, String email, String password) {
+	public Admin(int id, String name, String email, String password, boolean status) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		this.status = status;
 	}
+
+	public Admin() {
+	}
+
+	
 
 	public int getId() {
 		return id;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 	public void setId(int id) {

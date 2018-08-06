@@ -107,6 +107,12 @@ public class AdminService {
 	}
 	
 	
+	public boolean authAdmin(String email, String password) {
+		
+		return false;
+	}
+	
+	
 	
 	
 	

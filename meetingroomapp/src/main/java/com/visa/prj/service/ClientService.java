@@ -39,6 +39,8 @@ public class ClientService {
 	}
 	public List<Equipment> getEquipments(){
 		return equipmentDao.findAll();
+		
+		
 	}
 	
 }

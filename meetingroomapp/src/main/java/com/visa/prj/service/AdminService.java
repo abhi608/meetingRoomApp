@@ -41,7 +41,11 @@ public class AdminService {
 	
 	
 	public Admin getAdminById(String email) {
-		return adminDao.findById(email).get();
+		try {
+			return adminDao.findById(email).get();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
 	public List<Booking> getBookings() {

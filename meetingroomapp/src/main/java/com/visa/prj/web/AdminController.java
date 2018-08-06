@@ -20,20 +20,19 @@ public class AdminController {
 	public String getLoginDetails(HttpServletRequest req) {
 		String email=req.getParameter("email");
 		String password = req.getParameter("password");
-		System.out.println(email + password);
-		//System.out.println(adminService.getAdminById(email));
-		Admin admin = adminService.getAdminById(email); 
-		
-		if(admin != null) {
-		if(admin.getPassword().equals(password) && admin.isStatus()) {
-			return "redirect:admin.html?msg=login_success";
+		try {
+			Admin admin = adminService.getAdminById(email);
+			if(admin.getPassword().equals(password) && admin.isStatus()) {
+				return "redirect:admin.html?msg=login_success";
+			} else if(!admin.getPassword().equals(password)) {
+				return "redirect:adminlogin.html?msg=Invalid Email/password";
+			} else {
+				return "redirect:adminlogin.html?msg=User Inactive";
+			}
+		} catch (Exception e) {
+			return "redirect:adminlogin.html?msg=Invalid Email/password";
 		}
-		else 
-			return "redirect:adminlogin.html?msg=try_again";
-		}
-		else
-			return "redirect:adminlogin.html?msg=try_again";
-		
+	
 	}
 
 }

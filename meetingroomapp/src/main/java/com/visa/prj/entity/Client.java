@@ -2,8 +2,6 @@ package com.visa.prj.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,8 +10,7 @@ import javax.persistence.Table;
 public class Client {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private String email;
 	
 	private String name;
 	private String address;
@@ -21,25 +18,20 @@ public class Client {
 	@Column(name="phone_number")
 	private int phoneNumber;
 	
-	private String email;
+	
 	
 	
 	public Client() {
 	}
-	public Client(int id, String name, String address, int phoneNumber, String email) {
-		this.id = id;
+	public Client(String name, String address, int phoneNumber, String email) {
+		
 		this.name = name;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 	}
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getName() {
 		return name;
 	}

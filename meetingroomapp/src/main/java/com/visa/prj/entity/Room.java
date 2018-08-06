@@ -1,5 +1,6 @@
 package com.visa.prj.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,8 +15,14 @@ public class Room {
 	private String name;
 	private int capacity;
 	private boolean status;
+	
+	@Column(name="hour_price")
 	private double hourPrice;
+	
+	@Column(name="half_day_price")
 	private double halfDayPrice;
+	
+	@Column(name="full_day_price")
 	private double fullDayPrice;
 	
 	

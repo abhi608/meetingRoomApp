@@ -1,5 +1,6 @@
 package com.visa.prj.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +15,10 @@ public class Client {
 	
 	private String name;
 	private String address;
+	
+	@Column(name="phone_number")
 	private int phoneNumber;
+	
 	private String email;
 	
 	

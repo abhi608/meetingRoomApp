@@ -1,5 +1,6 @@
 package com.visa.prj.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,10 +11,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="items")
-public class equipment_line_item {
+public class EquipmentLineItem {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="item_id")
 	private int itemId;
 	
 	@ManyToOne
@@ -56,7 +58,7 @@ public class equipment_line_item {
 		this.amount = amount;
 	}
 
-	public equipment_line_item(int itemId, Equipment equipment, int quantity, double amount) {
+	public EquipmentLineItem(int itemId, Equipment equipment, int quantity, double amount) {
 		super();
 		this.itemId = itemId;
 		this.equipment = equipment;
@@ -64,7 +66,7 @@ public class equipment_line_item {
 		this.amount = amount;
 	}
 
-	public equipment_line_item() {
+	public EquipmentLineItem() {
 		super();
 	}
 
@@ -89,7 +91,7 @@ public class equipment_line_item {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		equipment_line_item other = (equipment_line_item) obj;
+		EquipmentLineItem other = (EquipmentLineItem) obj;
 		if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
 			return false;
 		if (equipment == null) {

@@ -1,6 +1,6 @@
 package com.visa.prj.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,6 +23,10 @@ public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name="booking_date")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date bookingDate= new Date();
 	
 	@ManyToOne
 	@JoinColumn(name="room_fk")

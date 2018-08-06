@@ -12,13 +12,17 @@ import com.visa.prj.entity.Room;
 public class ClientService {
 
 	@Autowired
-	private RoomDao roomdao;
+	private RoomDao roomDao;
 	
 	public Room getRoomById(int id) {
-		return roomdao.findById(id).get();
+		return roomDao.findById(id).get();
 	}
 	public List<Room> getRooms(){
-		return roomdao.findAll();
+		return roomDao.findAll();
+	}
+	
+	public List<Room> getSortedRooms(){
+		return roomDao.getSortedRoom();
 	}
 	
 }

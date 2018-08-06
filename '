@@ -1,0 +1,12 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch equipment_tanya
+# Changes to be committed:
+#	renamed:    meetingroomapp/src/main/java/com/visa/prj/entity/equipment_line_item.java -> meetingroomapp/src/main/java/com/visa/prj/entity/equipmentLineItem.java
+#
+# Changes not staged for commit:
+#	modified:   meetingroomapp/src/main/java/com/visa/prj/dao/OrderDao.java
+#	modified:   meetingroomapp/src/main/java/com/visa/prj/entity/equipmentLineItem.java
+#

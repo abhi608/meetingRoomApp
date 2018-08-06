@@ -3,7 +3,9 @@ package com.visa.prj.entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Table(name="layouts")
 public class Layout {
 	
 	@Id

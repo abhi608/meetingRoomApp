@@ -52,6 +52,10 @@ public class AdminService {
 		return bookingDao.findAll();
 	}
 	
+	public List<Booking> getTotalBookings2() {
+		return bookingDao.getBookingsNDates();
+	}
+	
 	@Transactional
 	public void addBooking(Booking booking) {
 		bookingDao.save(booking);

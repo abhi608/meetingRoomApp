@@ -14,6 +14,8 @@ public interface BookingDao extends JpaRepository<Booking, Integer> {
 	@Query("from Booking b order by b.bookingDate")
 	List<Booking> getSortedBooking();
 	
+	@Query("select b,DATE(b.fromDate) as bookdate from Booking b")
+	List<Booking> getBookingsNDates();
 	
 
 

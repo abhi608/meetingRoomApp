@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
 <style>
 * {box-sizing: border-box}
 body {font-family: "Lato", sans-serif;}
@@ -102,14 +103,34 @@ body {font-family: "Lato", sans-serif;}
   <h3>Bookings</h3>
   <button onclick="openCity(event, 'BookRoom')">Book Room</button>
   <p>Show Bookings</p>
-  <table>
-  	<th>Room</th>
-  	<th>Date</th>
-  	<th>Name</th>
-  	<th>Total</th>
-  	<th>Status</th>
-  	
+  <table id = "ModuleUserTable" border="1px solid black">
+  	<tr>
+  		<th>Room</th>
+  		<th>Date</th>
+  		<th>Name</th>
+  		<th>Amount</th>
+  		<th>Status</th>
+  	</tr>
   </table>
+  <script type="text/javascript">
+		$(function() {
+
+			var bksTempl$;
+			$.get("templates/booking.html",function(templ) {
+				bksTempl$ = templ;
+				var bookings$ = $("#bookings");
+				$.getJSON("http://localhost:8080/api/bookings", function(books) {
+					 
+					var content = Mustache.render(bksTempl$, books);
+					$('#ModuleUserTable').append(content);
+				
+				});
+			 });
+			
+			
+		});
+	</script>
+  
 </div>
 
 <div id="AddRoom" class="tabcontent">
@@ -119,6 +140,11 @@ body {font-family: "Lato", sans-serif;}
 
 <div id="BookRoom" class="tabcontent">
   <h3>Book a room</h3>
+  <form action="api/addbook" method="post">
+    	<input type="email" id="email" name="email" placeholder="email"/>
+    	<input type="password" class="form-control" id="password" name="password" placeholder="password">
+  	    <button type="submit" >Add Booking</button>
+  	</form>
   <p>This will book a room</p>
 </div>
 

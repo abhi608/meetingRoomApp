@@ -5,6 +5,10 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js"
+	integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+	crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
 <style>
 * {box-sizing: border-box}
 body {font-family: "Lato", sans-serif;}
@@ -70,33 +74,8 @@ body {font-family: "Lato", sans-serif;}
   <button class="tablinks" onclick="openCity(event, 'Users')">Users</button>
 </div>
 
-<div id="Dashboard" class="tabcontent">
-  <div class="container">
-	  <div class="row">
-	    <div class="col-sm-4">
-	      <div class="card3" style="width: 15rem;">
-  			<div class="card-body">
-    			<h5 class="card-title">x bookings made today</h5>
-  			</div>
-		  </div>
-	    </div>
-	    <div class="col-sm-4">
-	      <div class="card" style="width: 15rem;">
-  			<div class="card-body">
-    			<h5 class="card-title">y bookings for today</h5>
-  			</div>
-		  </div>
-	    </div>
-	    <div class="col-sm-4">
-	      <div class="card" style="width: 15rem;">
-  			<div class="card-body">
-    			<h5 class="card-title">z total bookings made</h5>
-  			</div>
-		  </div>
-	    </div>
-	  </div>
-  </div>
- </div>
+<div id="Dashboard" class="tabcontent"></div>
+
 
 <div id="Bookings" class="tabcontent">
   <h3>Bookings</h3>
@@ -136,18 +115,36 @@ body {font-family: "Lato", sans-serif;}
 
 
 <script>
+function display(evt, cityName) {
+	var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+        	tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+        	tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+}
+
 function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
+	var id = "#" + cityName;
+	var id$ = $(id);
+	var template = "templates/" + cityName + ".html";
+	var templ$;
+	console.log(id, id$, template);
+	$.get(template, function(templ){
+		templ$ = templ;
+		if(cityName == "Dashboard"){
+			$.getJSON("http://localhost:8080/api/dashboard", function(data){
+                        	var content = Mustache.render(templ$, data);
+                        	id$.html(content);
+				display(evt, cityName); 
+                	});
+		}
+	});
 }
 
 // Get the element with id="defaultOpen" and click on it
@@ -155,4 +152,4 @@ document.getElementById("defaultOpen").click();
 </script>
      
 </body>
-</html> 
+</html>

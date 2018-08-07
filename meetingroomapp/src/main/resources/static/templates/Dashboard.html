@@ -1,0 +1,55 @@
+{{#.}}
+<div class="container">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="card3" style="width: 15rem;">
+                        <div class="card-body" id="bookings_made_today">
+                        <h5 class="card-title">{{bookingMadeToday}} bookings made today</h5>
+                        </div>
+                  </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card" style="width: 15rem;">
+                        <div class="card-body" id="bookings_for_today">
+                        <h5 class="card-title">{{bookingForToday}} bookings for today</h5>
+                        </div>
+                  </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card" style="width: 15rem;">
+                        <div class="card-body" id="total_bookings">
+                        <h5 class="card-title">{{totalBookingCount}} total bookings made</h5>
+                        </div>
+                  </div>
+            </div>
+          </div>
+  </div>
+  <br/>
+  <br/>
+  <hr>
+
+  <div class="container">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="card3" style="width: 15rem;">
+                        <div class="card-body">
+                                <h5 class="card-title">Latest Bookings</h5>
+                                <hr>
+				{{#sortedBooking}}
+                                <div class="card-text">
+                                        <p>{{room.name}}</p>
+                                        <p>Date: {{fromDate}}</p>
+                                        <p>{{client.name}}</p>
+                                </div>
+				<br/>
+				<br/>
+				<hr>
+				<br/>
+				<br/>
+				{{/sortedBooking}}
+                        </div>
+              </div>
+            </div>
+          </div>
+  </div>
+{{/.}}

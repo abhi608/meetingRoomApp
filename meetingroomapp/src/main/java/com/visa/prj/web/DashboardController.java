@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,17 +42,18 @@ public class DashboardController {
 	}
 	
 	@RequestMapping(value="api/dashboard" ,method=RequestMethod.POST)
-	public List<Booking> getDateBooking(@RequestBody String date){
+	public List<Booking> getDateBooking(@RequestBody Map<String, Object> date){
 		Date d;
+		System.out.println(date.get("date"));
 		try {
-			d = new SimpleDateFormat("dd/MM/yy").parse(date);
+			d = new SimpleDateFormat("dd/MM/yy").parse((String) date.get("date"));
 			System.out.println(d.toString());
 			return  adminService.getBookingByDate(d);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 		
 		
 	}

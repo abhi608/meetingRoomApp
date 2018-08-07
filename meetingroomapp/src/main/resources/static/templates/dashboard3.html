@@ -1,16 +1,18 @@
-{{#.}}
               <div class="card3" >
                         <div class="card-body">
                                 <h5 class="card-title">Reservations</h5>
                                 <hr>
-                                <input type="date" name="date" id="reservatioDate">
+                                <input type="date" name="date" id="reservationDate" value="" required>
                                 <button type="button" id="reservationBtn">Search</button><br/>
                                 <hr>
+                                {{#.}}
                                 <div class="card-text">
-                                        <p>Room</p>
-                                        <p>Client</p>
-                                        <p>fromtime - totime</p>
+                                        <p>{{room.name}}</p>
+                                        <p>{{client.name}}</p>
+                                        <p>{{fromDate}} - {{toDate}}</p>
                                 </div>
+                                <br/>
+                                <hr>
+                                {{/.}}
                         </div>
               </div>
-            {{/.}}

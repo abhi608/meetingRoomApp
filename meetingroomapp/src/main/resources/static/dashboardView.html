@@ -192,17 +192,30 @@ function openDashboard(evt, cityName){
 
 $(document).on("click","#reservationBtn", function(){
 	var date = $("#reservationDate").val();
-	var splitDate = date.split("/");
+	if(!date){
+		return;
+	}
+	var splitDate = date.split("-");
 	var dashboard3$ = $("#dashboard3");
 	var template3 = "templates/dashboard3.html";
-	var formatDate = splitDate[1] + "/" + splitDate[0] + "/" + splitDate[2];
+	var formatDate = splitDate[2] + "/" + splitDate[1] + "/" + splitDate[0];
+	console.log("formatDate: ", formatDate);
 	$.get(template3, function(temp3){
 		var temp3$ = temp3;
-		$.post("http://localhost:8080/api/dashboard", {date: formatDate}, function(data){
-			dashboard3$.empty();
-			var content =Mustache.render(temp3$, data);
-			dashboard3$.html(content);
+		$.ajax({
+			url: "http://localhost:8080/api/dashboard",
+			type: "POST",
+			data: JSON.stringify({"date": formatDate}),
+			contentType:"application/json",
+			dataType:"json",
+			success: function(data){
+				console.log("data: ", data);
+				dashboard3$.empty();
+				var content =Mustache.render(temp3$, data);
+				dashboard3$.html(content);
+			}
 		});
+		
 	})
 	
 });

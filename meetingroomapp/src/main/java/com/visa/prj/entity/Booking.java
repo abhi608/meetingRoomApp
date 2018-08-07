@@ -26,7 +26,7 @@ public class Booking {
 	
 	@Column(name="booking_date")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date bookingDate= new Date();
+	private Date bookingDate = new Date();
 	
 	@ManyToOne
 	@JoinColumn(name="room_fk")
@@ -45,7 +45,7 @@ public class Booking {
 	private int status;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="equip_line_item_fk")
+	@JoinColumn(name="booking_fk")
 	private List<EquipmentLineItem> equipLineItem;
 	
 	@Column(name="from_date")
@@ -63,6 +63,14 @@ public class Booking {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Date getBookingDate() {
+		return bookingDate;
+	}
+
+	public void setBookingDate(Date bookingDate) {
+		this.bookingDate = bookingDate;
 	}
 
 	public Room getRoom() {

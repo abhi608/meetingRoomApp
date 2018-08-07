@@ -48,7 +48,7 @@ public class AdminService {
 		}
 	}
 	
-	public List<Booking> getBookings() {
+	public List<Booking> getTotalBookings() {
 		return bookingDao.findAll();
 	}
 	
@@ -58,9 +58,30 @@ public class AdminService {
 	}
 	
 	@Transactional
-	public void deleteBooking(Booking booking) {
+	public void deleteBookingById(Booking booking) {
 		Booking b = bookingDao.findById(booking.getId()).get();
 		bookingDao.delete(b);
+	}
+	
+	@Transactional
+	public List<Booking > getSortedBookings() {
+	
+		return bookingDao.getSortedBooking();
+	}
+	
+	
+	//gives the total number of booking on that day
+	public void getBookingCountByDate() {
+		
+	}
+	
+	public void updateBookingIdById(int id, Booking bk) {
+		Booking b = bookingDao.getOne(id);
+		b.setRoom(bk.getRoom());
+		b.setLayout(bk.getLayout());
+		b.setType(bk.getType());
+		b.setStatus(bk.getStatus());
+		b.setEquipLineItem(bk.getEquipLineItem());
 	}
 
 	public Client getClientById(String email) {

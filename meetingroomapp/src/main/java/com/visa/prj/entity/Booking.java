@@ -45,7 +45,7 @@ public class Booking {
 	private int status;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="equip_line_item_fk")
+	@JoinColumn(name="booking_fk")
 	private List<EquipmentLineItem> equipLineItem;
 	
 	@Column(name="from_date")

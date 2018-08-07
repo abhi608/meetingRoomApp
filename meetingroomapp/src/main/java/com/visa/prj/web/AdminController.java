@@ -23,7 +23,7 @@ public class AdminController {
 		try {
 			Admin admin = adminService.getAdminById(email);
 			if(admin.getPassword().equals(password) && admin.isStatus()) {
-				return "redirect:adminHomeView.html?msg=login_success";
+				return "redirect:dashboardView.html?msg=login_success";
 			} else if(!admin.getPassword().equals(password)) {
 				return "redirect:adminLoginView.html?msg=Invalid Email/password";
 			} else {

@@ -12,6 +12,8 @@ function display(evt, cityName) {
         document.getElementById(cityName).style.display = "block";
         if(cityName == "Dashboard"){
         	$("#defaultOpen").addClass("active");
+        } else if(cityName == "Bookings"){
+        	$("#bookingsTab").addClass("active");
         }
         //evt.currentTarget.className += " active";
 }
@@ -32,6 +34,21 @@ function openCity(evt, cityName) {
                 	});
 		}
 	});
+}
+
+function openBookings(evt, cityName){
+	var bksTempl$;
+	$.get("templates/booking.html",function(templ) {
+		bksTempl$ = templ;
+		var bookings$ = $("#bookings");
+		$.getJSON("http://localhost:8080/api/bookings", function(books) {
+			 
+			var content = Mustache.render(bksTempl$, books);
+			$('#ModuleUserTable').append(content);
+			display(evt, cityName);
+		
+		});
+	 });
 }
 
 function openDashboard(evt, cityName){

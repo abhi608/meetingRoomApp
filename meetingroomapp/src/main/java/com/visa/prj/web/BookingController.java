@@ -20,8 +20,8 @@ public class BookingController {
 	
 	@RequestMapping(value="api/bookings",method=RequestMethod.GET)
 	public @ResponseBody List<Booking> getBookings() {
-		System.out.println(adminService.getTotalBookings());
-		return adminService.getTotalBookings();
+		System.out.println(adminService.getAllBookings());
+		return adminService.getAllBookings();
 	}
 	
 	 

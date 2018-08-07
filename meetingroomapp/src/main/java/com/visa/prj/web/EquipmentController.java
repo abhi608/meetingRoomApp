@@ -25,7 +25,7 @@ public class EquipmentController {
 	}
 	
 	
-	@RequestMapping(value="api/addEquipment",method=RequestMethod.POST)
+	@RequestMapping(value="api/equipment",method=RequestMethod.POST)
 	public @ResponseBody ResponseEntity<Equipment> addEquipment(@RequestBody Equipment equipment) {
 		adminService.addEquipment(equipment);
 		return new ResponseEntity<Equipment>(equipment,HttpStatus.CREATED);	}

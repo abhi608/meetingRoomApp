@@ -54,7 +54,11 @@ public class AdminService {
 	}
 	
 	public List<Booking> getAllBookings() {
+		try {
 		return bookingDao.findAll();
+		}catch(Exception e) {
+			return null;
+		}
 	}
 	
 	@Transactional
@@ -64,8 +68,12 @@ public class AdminService {
 	
 	@Transactional
 	public void deleteBookingById(Booking booking) {
-		Booking b = bookingDao.findById(booking.getId()).get();
-		bookingDao.delete(b);
+		try {
+				Booking b = bookingDao.findById(booking.getId()).get();
+				bookingDao.delete(b);
+			}catch(Exception e) {
+				System.out.println("No booking to delete");
+			}
 	}
 	
 	@Transactional
@@ -98,7 +106,11 @@ public class AdminService {
 	
 	
 	public List<Room> getRooms() {
+		try {
 		return roomDao.findAll();
+	}catch(Exception e) {
+		return null;
+	}
 	}
 	
 	@Transactional
@@ -108,12 +120,20 @@ public class AdminService {
 	
 
 	public Room getRoomById(int id) {
+		try {
 		return roomDao.findById(id).get();
+		}catch(Exception e) {
+			return null;
+		}
 	}
 		
 	
 	public List<Equipment> getEquipments() {
+		try{
 		return equipmentDao.findAll();
+	}catch(Exception e) {
+		return null;
+	}
 	}
 	
 	
@@ -139,7 +159,11 @@ public class AdminService {
 		e.setQuantity(eq.getQuantity());
 	}
 	public List<Layout> getLayouts() {
-		return layoutDao.findAll();
+		try {
+			return layoutDao.findAll();
+		}catch(Exception e) {
+			return null;
+		}
 	}
 	
 	

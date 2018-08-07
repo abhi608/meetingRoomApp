@@ -48,7 +48,7 @@ public class AdminService {
 		}
 	}
 	
-	public List<Booking> getTotalBookings() {
+	public List<Booking> getAllBookings() {
 		return bookingDao.findAll();
 	}
 	

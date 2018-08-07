@@ -1,5 +1,6 @@
 package com.visa.prj.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -135,6 +136,22 @@ public class AdminService {
 	public boolean authAdmin(String email, String password) {
 		
 		return false;
+	}
+	public List<Booking> getBookingByDate(Date date){
+		try {
+			return bookingDao.getBookingByDate(date);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+	}
+	public List<Booking> getBookingMadeByDate(Date date){
+		try {
+			return bookingDao.getBookingMadeByDate(date);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
 	}
 	
 	

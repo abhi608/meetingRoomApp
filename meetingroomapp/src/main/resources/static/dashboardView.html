@@ -9,62 +9,9 @@
 	integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
 	crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
-<style>
-* {box-sizing: border-box}
-body {font-family: "Lato", sans-serif;}
-
-
-/* Style the tab */
-.tab {
-    float: left;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-    width: 15%;
-    /*height: 300px;*/
-}
-
-/* Style the buttons inside the tab */
-.tab button {
-    display: block;
-    background-color: inherit;
-    color: black;
-    padding: 22px 16px;
-    width: 100%;
-    border: none;
-    outline: none;
-    text-align: left;
-    cursor: pointer;
-    transition: 0.3s;
-    font-size: 17px;
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-    background-color: #ddd;
-}
-
-/* Create an active/current "tab button" class */
-.tab button.active {
-    background-color: #ccc;
-}
-
-/* Style the tab content */
-.tabcontent {
-    float: left;
-    padding: 0px 12px;
-	border: 1px solid #ccc;
-    width: 85%;
-    border-left: 1px solid #ccc ;
-    border-bottom: 1px solid #ccc;
-    /* height: 300px;*/
-}
-</style>
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
-<p>Welcome </p><br />
-
-
 <div class="tab">
   <button class="tablinks" onclick="openDashboard(event, 'Dashboard')" id="defaultOpen">Dashboard</button>
   <button class="tablinks" onclick="openCity(event, 'Bookings')">Bookings</button>
@@ -126,103 +73,7 @@ body {font-family: "Lato", sans-serif;}
 
 
 
-<script>
-function display(evt, cityName) {
-	console.log("test: ", evt);
-		var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-        	tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-        	tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(cityName).style.display = "block";
-        if(cityName == "Dashboard"){
-        	$("#defaultOpen").addClass("active");
-        }
-        //evt.currentTarget.className += " active";
-}
-
-function openCity(evt, cityName) {
-	var id = "#" + cityName;
-	var id$ = $(id);
-	var template = "templates/" + cityName + ".html";
-	var templ$;
-	console.log(id, id$, template);
-	$.get(template, function(templ){
-		templ$ = templ;
-		if(cityName == "Dashboard"){
-			$.getJSON("http://localhost:8080/api/dashboard", function(data){
-                        	var content = Mustache.render(templ$, data);
-                        	id$.html(content);
-							display(evt, cityName); 
-                	});
-		}
-	});
-}
-
-function openDashboard(evt, cityName){
-	var dashboard1$ = $("#dashboard1");
-	var template1 = "templates/dashboard1.html";
-	var dashboard2$ = $("#dashboard2");
-	var template2 = "templates/dashboard2.html";
-	var dashboard3$ = $("#dashboard3");
-	var template3 = "templates/dashboard3.html";
-	$.get(template1, function(temp1){
-		var temp1$ = temp1;
-		$.get(template2, function(temp2){
-			var temp2$ = temp2;
-			$.get(template3, function(temp3){
-				var temp3$ = temp3;
-				$.getJSON("http://localhost:8080/api/dashboard", function(data1){
-					var content1 = Mustache.render(temp1$, data1);
-					dashboard1$.html(content1);
-					var content2 = Mustache.render(temp2$, data1);
-					dashboard2$.html(content2);
-					var content3 = Mustache.render(temp3$, {});
-					dashboard3$.html(content3);
-					display(evt, cityName);
-				});
-			});
-		});
-	});
-}
-
-$(document).on("click","#reservationBtn", function(){
-	var date = $("#reservationDate").val();
-	if(!date){
-		return;
-	}
-	var splitDate = date.split("-");
-	var dashboard3$ = $("#dashboard3");
-	var template3 = "templates/dashboard3.html";
-	var formatDate = splitDate[2] + "/" + splitDate[1] + "/" + splitDate[0];
-	console.log("formatDate: ", formatDate);
-	$.get(template3, function(temp3){
-		var temp3$ = temp3;
-		$.ajax({
-			url: "http://localhost:8080/api/dashboard",
-			type: "POST",
-			data: JSON.stringify({"date": formatDate}),
-			contentType:"application/json",
-			dataType:"json",
-			success: function(data){
-				console.log("data: ", data);
-				dashboard3$.empty();
-				var content =Mustache.render(temp3$, data);
-				dashboard3$.html(content);
-			}
-		});
-		
-	})
-	
-});
-
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
-</script>
+<script type="text/javascript" src="js/common.js"></script>
      
 </body>
 </html>

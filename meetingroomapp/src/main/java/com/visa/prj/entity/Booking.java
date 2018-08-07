@@ -26,7 +26,7 @@ public class Booking {
 	
 	@Column(name="booking_date")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date bookingDate= new Date();
+	private Date bookingDate = new Date();
 	
 	@ManyToOne
 	@JoinColumn(name="room_fk")
@@ -63,6 +63,14 @@ public class Booking {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Date getBookingDate() {
+		return bookingDate;
+	}
+
+	public void setBookingDate(Date bookingDate) {
+		this.bookingDate = bookingDate;
 	}
 
 	public Room getRoom() {

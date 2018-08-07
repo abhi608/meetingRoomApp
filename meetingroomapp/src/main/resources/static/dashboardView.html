@@ -177,9 +177,9 @@ function openDashboard(evt, cityName){
 			$.get(template3, function(temp3){
 				var temp3$ = temp3;
 				$.getJSON("http://localhost:8080/api/dashboard", function(data1){
-					var content1 = Mustache.render(temp1$, data);
+					var content1 = Mustache.render(temp1$, data1);
 					dashboard1$.html(content1);
-					var content2 = Mustache.render(temp2$, data);
+					var content2 = Mustache.render(temp2$, data1);
 					dashboard2$.html(content2);
 					var content3 = Mustache.render(temp3$, {});
 					dashboard3$.html(content3);
@@ -190,15 +190,21 @@ function openDashboard(evt, cityName){
 	});
 }
 
-$(document).on("click","#reservations", function(){
+$(document).on("click","#reservationBtn", function(){
 	var date = $("#reservationDate").val();
 	var splitDate = date.split("/");
-	var id$ = $("#res");
+	var dashboard3$ = $("#dashboard3");
+	var template3 = "templates/dashboard3.html";
 	var formatDate = splitDate[1] + "/" + splitDate[0] + "/" + splitDate[2];
-	$.post("http://localhost:8080/api/dashboard", {date: formatDate}, function(data){
-		id$.empty();
-		
-	});
+	$.get(template3, function(temp3){
+		var temp3$ = temp3;
+		$.post("http://localhost:8080/api/dashboard", {date: formatDate}, function(data){
+			dashboard3$.empty();
+			var content =Mustache.render(temp3$, data);
+			dashboard3$.html(content);
+		});
+	})
+	
 });
 
 // Get the element with id="defaultOpen" and click on it

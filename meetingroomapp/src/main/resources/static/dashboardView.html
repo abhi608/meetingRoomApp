@@ -66,7 +66,7 @@ body {font-family: "Lato", sans-serif;}
 
 
 <div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'Dashboard')" id="defaultOpen">Dashboard</button>
+  <button class="tablinks" onclick="openDashboard(event, 'Dashboard')" id="defaultOpen">Dashboard</button>
   <button class="tablinks" onclick="openCity(event, 'Bookings')">Bookings</button>
   <button class="tablinks" onclick="openCity(event, 'AddRoom')">Add Room</button>
   <button class="tablinks" onclick="openCity(event, 'BookRoom')">Book Room</button>
@@ -74,7 +74,19 @@ body {font-family: "Lato", sans-serif;}
   <button class="tablinks" onclick="openCity(event, 'Users')">Users</button>
 </div>
 
-<div id="Dashboard" class="tabcontent"></div>
+<div id="Dashboard" class="tabcontent">
+	<div class="container" id="dashboard1"></div>
+	<br/>
+	<br/>
+	<hr>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6" id="dashboard2"></div>
+			<div class="col-md-6" id="dashboard3"></div>
+		</div>
+	</div>
+		
+</div>
 
 
 <div id="Bookings" class="tabcontent">

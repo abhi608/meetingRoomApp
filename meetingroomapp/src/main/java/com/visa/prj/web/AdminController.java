@@ -1,6 +1,7 @@
 package com.visa.prj.web;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,8 @@ public class AdminController {
 		try {
 			Admin admin = adminService.getAdminById(email);
 			if(admin.getPassword().equals(password) && admin.isStatus()) {
+				HttpSession ses = req.getSession();
+				ses.setAttribute("user", email);
 				return "redirect:dashboardView.html?msg=login_success";
 			} else if(!admin.getPassword().equals(password)) {
 				return "redirect:adminLoginView.html?msg=Invalid Email/password";

@@ -11,7 +11,7 @@ import com.visa.prj.entity.Booking;
 
 public interface BookingDao extends JpaRepository<Booking, Integer> {
 
-	@Query("from Booking b orderby b.bookingDate")
+	@Query("from Booking b order by b.bookingDate")
 	List<Booking> getSortedBooking();
 	
 	

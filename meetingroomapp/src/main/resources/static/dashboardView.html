@@ -116,7 +116,8 @@ body {font-family: "Lato", sans-serif;}
 
 <script>
 function display(evt, cityName) {
-	var i, tabcontent, tablinks;
+	console.log("test: ", evt);
+		var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
         	tabcontent[i].style.display = "none";
@@ -126,7 +127,10 @@ function display(evt, cityName) {
         	tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
         document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
+        if(cityName == "Dashboard"){
+        	$("#defaultOpen").addClass("active");
+        }
+        //evt.currentTarget.className += " active";
 }
 
 function openCity(evt, cityName) {
@@ -141,7 +145,7 @@ function openCity(evt, cityName) {
 			$.getJSON("http://localhost:8080/api/dashboard", function(data){
                         	var content = Mustache.render(templ$, data);
                         	id$.html(content);
-				display(evt, cityName); 
+							display(evt, cityName); 
                 	});
 		}
 	});

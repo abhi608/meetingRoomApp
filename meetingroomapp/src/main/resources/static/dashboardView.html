@@ -151,6 +151,17 @@ function openCity(evt, cityName) {
 	});
 }
 
+$(document).on("click","#reservations", function(){
+	var date = $("#reservationDate").val();
+	var splitDate = date.split("/");
+	var id$ = $("#res");
+	var formatDate = splitDate[1] + "/" + splitDate[0] + "/" + splitDate[2];
+	$.post("http://localhost:8080/api/dashboard", {date: formatDate}, function(data){
+		id$.empty();
+		
+	});
+});
+
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 </script>

@@ -138,10 +138,20 @@ public class AdminService {
 		return false;
 	}
 	public List<Booking> getBookingByDate(Date date){
-		return bookingDao.getBookingByDate(date);
+		try {
+			return bookingDao.getBookingByDate(date);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
 	}
 	public List<Booking> getBookingMadeByDate(Date date){
-		return bookingDao.getBookingMadeByDate(date);
+		try {
+			return bookingDao.getBookingMadeByDate(date);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
 	}
 	
 	

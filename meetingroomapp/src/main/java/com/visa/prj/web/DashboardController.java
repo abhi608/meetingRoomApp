@@ -1,10 +1,11 @@
 package com.visa.prj.web;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,42 +16,44 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.visa.prj.service.AdminService;
 import com.visa.prj.entity.Booking;
+import com.visa.prj.entity.DashBoard;
 
 @RestController
 public class DashboardController {
 	
 	
 	@Autowired
-	private AdminService admin;
-	@RequestMapping(value="/dashboard",method=RequestMethod.GET)
-	public ResponseEntity<String> getDashboard(){
-		JSONObject j=new JSONObject();
-		List<Booking> sortedBooking=admin.getSortedBookings();
-		List<Booking> totalBooking=admin.getTotalBookings();
-		List<Booking> bookingToday= admin.getBookingByDate(new Date());
-		List<Booking> bookingMadeToday=admin.getBookingMadeByDate(new Date());
-		try {
-			j.put("sorted_booking", sortedBooking);
-			j.put("total_booking", totalBooking.size());
-			j.put("booking_today", bookingToday.size() );
-			j.put("booking_made_today", bookingMadeToday.size());
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return new ResponseEntity<String>(j.toString(),HttpStatus.OK);
+	private AdminService adminService;
+	@RequestMapping(value="api/dashboard",method=RequestMethod.GET)
+	public DashBoard getDashboard(){
+		DashBoard d=new DashBoard();
+		
+		List<Booking> sortedBooking=adminService.getSortedBookings();
+		List<Booking> totalBooking=adminService.getTotalBookings();
+		List<Booking> bookingToday= adminService.getBookingByDate(new Date());
+		List<Booking> bookingMadeToday=adminService.getBookingMadeByDate(new Date());
+		
+			d.setSortedBooking(sortedBooking);
+			d.setTotalBookingCount(totalBooking.size());
+			d.setBookingForToday(bookingToday.size());			
+			d.setBookingMadeToday(bookingMadeToday.size());
+		
+		return d;
 	}
 	
-	@RequestMapping(value="/dashboard" ,method=RequestMethod.POST)
-	public ResponseEntity<String> getDateBooking(@RequestBody Date date){
-		JSONObject j=new JSONObject();
-		List<Booking> bookingByDate= admin.getBookingByDate(date);
+	@RequestMapping(value="api/dashboard" ,method=RequestMethod.POST)
+	public List<Booking> getDateBooking(@RequestBody String date){
+		Date d;
 		try {
-			j.put("booking_by_date", bookingByDate);
-		} catch (JSONException e) {
+			d = new SimpleDateFormat("dd/MM/yy").parse(date);
+			System.out.println(d.toString());
+			return  adminService.getBookingByDate(d);
+		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new ResponseEntity<String>(j.toString(),HttpStatus.OK);
+		return null;
+		
+		
 	}
 }

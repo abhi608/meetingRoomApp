@@ -52,7 +52,7 @@ public class AdminService {
 	public List<Booking> getTotalBookings() {
 		return bookingDao.findAll();
 	}
-	
+		
 	@Transactional
 	public void addBooking(Booking booking) {
 		bookingDao.save(booking);
@@ -137,6 +137,7 @@ public class AdminService {
 		
 		return false;
 	}
+	
 	public List<Booking> getBookingByDate(Date date){
 		try {
 			return bookingDao.getBookingByDate(date);
@@ -145,6 +146,7 @@ public class AdminService {
 			return null;
 		}
 	}
+	
 	public List<Booking> getBookingMadeByDate(Date date){
 		try {
 			return bookingDao.getBookingMadeByDate(date);

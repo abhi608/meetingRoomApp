@@ -29,7 +29,7 @@ public class DashboardController {
 		DashBoard d=new DashBoard();
 		
 		List<Booking> sortedBooking=adminService.getSortedBookings();
-		List<Booking> totalBooking=adminService.getTotalBookings();
+		List<Booking> totalBooking=adminService.getAllBookings();
 		List<Booking> bookingToday= adminService.getBookingByDate(new Date());
 		List<Booking> bookingMadeToday=adminService.getBookingMadeByDate(new Date());
 		

@@ -12,11 +12,13 @@ import com.visa.prj.dao.AdminDao;
 import com.visa.prj.dao.BookingDao;
 import com.visa.prj.dao.ClientDao;
 import com.visa.prj.dao.EquipmentDao;
+import com.visa.prj.dao.LayoutDao;
 import com.visa.prj.dao.RoomDao;
 import com.visa.prj.entity.Admin;
 import com.visa.prj.entity.Booking;
 import com.visa.prj.entity.Client;
 import com.visa.prj.entity.Equipment;
+import com.visa.prj.entity.Layout;
 import com.visa.prj.entity.Room;
 
 
@@ -39,6 +41,9 @@ public class AdminService {
 	@Autowired
 	private AdminDao adminDao;
 	
+	@Autowired
+	private LayoutDao layoutDao;
+	
 	
 	
 	public Admin getAdminById(String email) {
@@ -49,8 +54,12 @@ public class AdminService {
 		}
 	}
 	
-	public List<Booking> getTotalBookings() {
+	public List<Booking> getAllBookings() {
+		try {
 		return bookingDao.findAll();
+		}catch(Exception e) {
+			return null;
+		}
 	}
 		
 	@Transactional
@@ -60,8 +69,12 @@ public class AdminService {
 	
 	@Transactional
 	public void deleteBookingById(Booking booking) {
-		Booking b = bookingDao.findById(booking.getId()).get();
-		bookingDao.delete(b);
+		try {
+				Booking b = bookingDao.findById(booking.getId()).get();
+				bookingDao.delete(b);
+			}catch(Exception e) {
+				System.out.println("No booking to delete");
+			}
 	}
 	
 	@Transactional
@@ -72,7 +85,10 @@ public class AdminService {
 	
 	
 	//gives the total number of booking on that day
-	public void getBookingCountByDate() {
+	public int getBookingCountByDate() {
+		
+		return 0;
+		
 		
 	}
 	
@@ -91,7 +107,11 @@ public class AdminService {
 	
 	
 	public List<Room> getRooms() {
+		try {
 		return roomDao.findAll();
+	}catch(Exception e) {
+		return null;
+	}
 	}
 	
 	@Transactional
@@ -101,12 +121,20 @@ public class AdminService {
 	
 
 	public Room getRoomById(int id) {
+		try {
 		return roomDao.findById(id).get();
+		}catch(Exception e) {
+			return null;
+		}
 	}
 		
 	
 	public List<Equipment> getEquipments() {
+		try{
 		return equipmentDao.findAll();
+	}catch(Exception e) {
+		return null;
+	}
 	}
 	
 	
@@ -130,6 +158,13 @@ public class AdminService {
 		e.setName(eq.getName());
 		e.setPrice(eq.getPrice());
 		e.setQuantity(eq.getQuantity());
+	}
+	public List<Layout> getLayouts() {
+		try {
+			return layoutDao.findAll();
+		}catch(Exception e) {
+			return null;
+		}
 	}
 	
 	

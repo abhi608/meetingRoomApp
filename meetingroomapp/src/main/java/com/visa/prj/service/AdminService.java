@@ -11,11 +11,13 @@ import com.visa.prj.dao.AdminDao;
 import com.visa.prj.dao.BookingDao;
 import com.visa.prj.dao.ClientDao;
 import com.visa.prj.dao.EquipmentDao;
+import com.visa.prj.dao.LayoutDao;
 import com.visa.prj.dao.RoomDao;
 import com.visa.prj.entity.Admin;
 import com.visa.prj.entity.Booking;
 import com.visa.prj.entity.Client;
 import com.visa.prj.entity.Equipment;
+import com.visa.prj.entity.Layout;
 import com.visa.prj.entity.Room;
 
 
@@ -38,7 +40,8 @@ public class AdminService {
 	@Autowired
 	private AdminDao adminDao;
 	
-	
+	@Autowired
+	private LayoutDao layoutDao;
 	
 	public Admin getAdminById(String email) {
 		try {
@@ -95,6 +98,10 @@ public class AdminService {
 	
 	public List<Room> getRooms() {
 		return roomDao.findAll();
+	}
+	
+	public List<Layout> getLayouts(){
+		return layoutDao.findAll();
 	}
 	
 	@Transactional

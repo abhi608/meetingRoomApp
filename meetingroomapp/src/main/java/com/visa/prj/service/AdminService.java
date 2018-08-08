@@ -52,9 +52,26 @@ public class AdminService {
 		}
 	}
 	
+	public List<Admin> getAllAdmins(){
+		try {
+			return adminDao.findAll();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	@Transactional
+	public void deleteAdminByEmail(String email) {
+		try {
+			adminDao.deleteById(email);
+		} catch (Exception e) {
+			System.out.println("no admin to delete!");
+		}
+	}
+	
 	public List<Booking> getAllBookings() {
 		try {
-		return bookingDao.findAll();
+			return bookingDao.findAll();
 		}catch(Exception e) {
 			return null;
 		}
@@ -186,6 +203,16 @@ public class AdminService {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			return null;
+		}
+	}
+
+	@Transactional
+	public void changeAdminStatus(String email) {
+		Admin a = adminDao.getOne(email);
+		try {
+			a.setStatus(!a.isStatus());
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 	

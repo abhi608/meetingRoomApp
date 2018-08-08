@@ -12,8 +12,8 @@ insert into equipments (name, price, quantity) values ('equip1',100,100);
 insert into equipments (name, price, quantity) values ('equip2',200,150);
 insert into equipments (name, price, quantity) values ('equip3',300,200);
 
-insert into admins (email,name,password,status) values ('shubhrit@gmail.com','shubhrit','shubhrit',1);
-insert into admins (email,name,password,status) values ('abhishek@gmail.com','abhishek','abhishek',1);
+insert into admins (email,name,password,status,registration_date) values ('shubhrit@gmail.com','shubhrit','shubhrit',1,'2018-08-07 07:34:09');
+insert into admins (email,name,password,status,registration_date) values ('abhishek@gmail.com','abhishek','abhishek',1,'2018-07-07 05:21:54');
 
 insert into clients (email,address,name,phone_number) values ('tanya@visa.com','lucknow','tanya',99999);
 insert into clients (email,address,name,phone_number) values ('mansi@visa.com','mumbai','mansi',77777);

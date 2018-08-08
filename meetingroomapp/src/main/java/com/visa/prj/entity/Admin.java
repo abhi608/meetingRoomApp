@@ -1,5 +1,8 @@
 package com.visa.prj.entity;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -14,19 +17,32 @@ public class Admin {
 	private String name;
 
 	private String password;
+	
 	private boolean status;
+	
+	@Column(name="registration_date")
+	private Date registrationDate = new Date();
 
-	public Admin(String name, String email, String password, boolean status) {
+	public Admin(String name, String email, String password, boolean status, Date registrationDate) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.status = status;
+		this.registrationDate = registrationDate;
 	}
 
 	public Admin() {
 	}
 
+	
 
+	public Date getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(Date registrationDate) {
+		this.registrationDate = registrationDate;
+	}
 
 	public boolean isStatus() {
 		return status;

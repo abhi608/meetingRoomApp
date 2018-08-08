@@ -1,0 +1,23 @@
+<table border="1px solid black">
+<tr>
+	<th>Name</th>
+	<th>Email</th>
+	<th>Registration Date/Time</th>
+	<th>Status</th>
+	<th>Options</th>
+</tr>
+{{#.}}
+<tr>
+<td>{{name}}</td>
+<td> {{email}}</td>
+<td> {{registrationDate}}</td>
+<td> {{status}}</td>
+<td>
+	<div>
+	<button type="button" name="{{email}}" class="deleteUser" onclick='deleteAdmin("{{email}}")'>Delete</button><br/>
+	<button type="button" name="{{email}}" class="changeUserStatus" onclick='changeAdminStatus("{{email}}")'>Switch Status</button>
+	</div>
+</td>
+</tr>
+{{/.}}
+</table>

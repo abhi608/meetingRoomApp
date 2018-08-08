@@ -28,7 +28,8 @@ public class EquipmentController {
 	@RequestMapping(value="api/equipment",method=RequestMethod.POST)
 	public @ResponseBody ResponseEntity<Equipment> addEquipment(@RequestBody Equipment equipment) {
 		adminService.addEquipment(equipment);
-		return new ResponseEntity<Equipment>(equipment,HttpStatus.CREATED);	}
+		return new ResponseEntity<Equipment>(equipment,HttpStatus.CREATED);
+	}
 	
 	
 	@RequestMapping(value="api/equipment/{eq_id}",method=RequestMethod.DELETE)

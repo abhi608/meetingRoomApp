@@ -18,7 +18,7 @@
   <button class="tablinks" onclick="openCity(event, 'AddRoom')">Add Room</button>
   <button class="tablinks" onclick="addBooking(event, 'BookRoom')" id="addBookingTab">Book Room</button>
   <button class="tablinks" onclick="openCity(event, 'Equipments')">Equipments</button>
-  <button class="tablinks" onclick="openCity(event, 'Users')">Users</button>
+  <button class="tablinks" onclick="openUsers(event, 'Users')" id="usersTab">Users</button>
 </div>
 
 <div id="Dashboard" class="tabcontent">
@@ -106,7 +106,8 @@
 
 <div id="Users" class="tabcontent">
   <h3>Users</h3>
-  <p>Show all the rooms</p>
+  <button onclick="addUser(event, 'BookRoom')">Add User</button>
+  <div id="userTable"></div>
 </div>
 
 

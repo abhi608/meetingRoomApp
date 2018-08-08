@@ -16,6 +16,8 @@ function display(evt, cityName) {
         	$("#bookingsTab").addClass("active");
         } else if(cityName == "BookRoom"){
         	$("#addBookingTab").addClass("active");
+        } else if(cityName == "Users"){
+        	$("#usersTab").addClass("active");
         }
         //evt.currentTarget.className += " active";
 }
@@ -38,13 +40,61 @@ function openCity(evt, cityName) {
 	});
 }
 
+function openUsers(evt, cityName){
+	var usersTempl$;
+	$.get("templates/user.html",function(templ) {
+		usersTempl$ = templ;
+		$.getJSON("http://localhost:8080/api/admins", function(users) {
+			for(var i=0; i<users.length; i++){
+				if('status' in users[i]){
+					if(users[i].status){
+						users[i].status = "Active";
+						
+					} else{
+						users[i].status = "Inactive";
+					}
+				}
+			}
+			var content = Mustache.render(usersTempl$, users);
+			$("#userTable").empty();
+			$('#userTable').html(content);
+			display(evt, cityName);
+		
+		});
+	 });
+}
+
+function deleteAdmin(email){
+	var url = "/api/admin/" + email;
+	$.ajax({
+	    url: url,
+	    type: 'DELETE',
+	    success: function(message) {
+	        openUsers(null, "Users");
+	    }
+	});
+}
+
+function changeAdminStatus(email){
+	var url = "/api/changeAdminStatus/" + email;
+	var data = {};
+	console.log(data);
+	$.ajax({
+        type: 'PUT',
+        url: url,
+        data: JSON.stringify(data),
+        contentType:"application/json",
+        success: function (message) {
+        	openUsers(null, "Users");
+        }
+    });
+}
+
 function openBookings(evt, cityName){
 	var bksTempl$;
 	$.get("templates/booking.html",function(templ) {
 		bksTempl$ = templ;
-		var bookings$ = $("#bookings");
 		$.getJSON("http://localhost:8080/api/bookings", function(books) {
-			 
 			var content = Mustache.render(bksTempl$, books);
 			$('#ModuleUserTable').append(content);
 			display(evt, cityName);

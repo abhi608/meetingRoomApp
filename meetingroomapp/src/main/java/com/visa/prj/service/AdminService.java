@@ -44,8 +44,6 @@ public class AdminService {
 	@Autowired
 	private LayoutDao layoutDao;
 	
-	
-	
 	public Admin getAdminById(String email) {
 		try {
 			return adminDao.findById(email).get();

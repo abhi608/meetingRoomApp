@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.visa.prj.entity.Booking;
+import com.visa.prj.entity.Layout;
+import com.visa.prj.entity.Room;
 import com.visa.prj.service.AdminService;
 
 
@@ -23,6 +25,18 @@ public class BookingController {
 		System.out.println(adminService.getAllBookings());
 		return adminService.getAllBookings();
 	}
+	
+	@RequestMapping(value="api/room",method=RequestMethod.GET)
+	public @ResponseBody List<Room> getRooms(){
+		return adminService.getRooms();
+	}
+	
+	@RequestMapping(value="api/layout",method=RequestMethod.GET)
+	public @ResponseBody List<Layout> getLayouts(){
+		return adminService.getLayouts();
+	}
+	
+	
 	
 
 }

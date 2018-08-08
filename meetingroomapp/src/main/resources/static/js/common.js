@@ -14,6 +14,8 @@ function display(evt, cityName) {
         	$("#defaultOpen").addClass("active");
         } else if(cityName == "Bookings"){
         	$("#bookingsTab").addClass("active");
+        } else if(cityName == "BookRoom"){
+        	$("#addBookingTab").addClass("active");
         }
         //evt.currentTarget.className += " active";
 }
@@ -49,6 +51,46 @@ function openBookings(evt, cityName){
 		
 		});
 	 });
+}
+
+function addBooking(evt, cityName){
+	console.log("evt, cityName: ", evt, cityName);
+	var roomTempl$;
+	var layoutTempl$;
+	$.get("templates/layout.html",function(layouttempl) {
+		layoutTempl$ = layouttempl;
+		$.getJSON("http://localhost:8080/api/layout", function(layouts) {
+			 
+			var content = Mustache.render(layoutTempl$, layouts);
+			$('#layout').append(content);
+			
+			$.get("templates/room.html",function(roomtempl) {
+				roomTempl$ = roomtempl;
+				$.getJSON("http://localhost:8080/api/room", function(rooms) {
+					 
+					content = Mustache.render(roomTempl$, rooms);
+					$('#room').append(content);
+					display(evt, cityName);
+				
+				});
+			 });
+		
+		});
+	 });
+}
+
+function typeCheck(that) {
+    if (that.value == "halfday") {
+        document.getElementById("halfday").style.display = "block";
+    	document.getElementById("perhour").style.display = "none";
+		
+    }else if(that.value == "perhour"){
+        document.getElementById("halfday").style.display = "none";
+    	document.getElementById("perhour").style.display = "block";
+    }else {
+        document.getElementById("halfday").style.display = "none";
+    	document.getElementById("perhour").style.display = "none";
+    }
 }
 
 function openDashboard(evt, cityName){

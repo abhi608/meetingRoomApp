@@ -6,16 +6,22 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.visa.prj.service.AdminService;
 import com.visa.prj.entity.Booking;
+import com.visa.prj.entity.ClientBooking;
 import com.visa.prj.entity.DashBoard;
 
 @RestController
@@ -24,6 +30,10 @@ public class DashboardController {
 	
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired 
+	 private HttpSession ses;
+	
 	@RequestMapping(value="api/dashboard",method=RequestMethod.GET)
 	public DashBoard getDashboard(){
 		DashBoard d=new DashBoard();
@@ -56,5 +66,22 @@ public class DashboardController {
 		}
 		
 		
+	}
+	
+	@RequestMapping(value="api/step/{step}", method=RequestMethod.POST)
+	public ResponseEntity<String> submitStep(@RequestBody Map<String, Object> data, @PathVariable("step") int step, HttpServletRequest req) {
+		if(step == 1) {
+			try {
+				System.out.println("ses: " + ses);
+				int roomId = Integer.parseInt((String) data.get("roomId"));
+				System.out.println("roomid: " + roomId);
+				HttpSession ses = req.getSession();
+				ses.setAttribute("roomId", roomId);
+				return new ResponseEntity<String>((String) data.get("roomId") + "selected",HttpStatus.OK);
+			} catch (Exception e) {
+				return null;
+			}
+		}
+		return null;
 	}
 }

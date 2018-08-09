@@ -11,11 +11,12 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
 <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 <div class="tab">
   <button class="tablinks" onclick="openDashboard(event, 'Dashboard')" id="defaultOpen">Dashboard</button>
   <button class="tablinks" onclick="openBookings(event, 'Bookings')" id="bookingsTab">Bookings</button>
-  <button class="tablinks" onclick="openCity(event, 'AddRoom')">Add Room</button>
+  <button class="tablinks" onclick="openRooms(event, 'ShowRooms')"  >Show Room</button>
   <button class="tablinks" onclick="addBooking(event, 'BookRoom')" id="addBookingTab">Book Room</button>
   <button class="tablinks" onclick="openCity(event, 'Equipments')">Equipments</button>
   <button class="tablinks" onclick="openUsers(event, 'Users')" id="usersTab">Users</button>
@@ -23,9 +24,8 @@
 
 <div id="Dashboard" class="tabcontent">
 	<div class="container" id="dashboard1"></div>
-	<br/>
-	<br/>
-	<hr>
+
+	<hr/>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6" id="dashboard2"></div>
@@ -37,19 +37,21 @@
 
 
 <div id="Bookings" class="tabcontent">
-  <h3>Bookings</h3>
-  <button onclick="addBooking(event, 'BookRoom')">Book Room</button>
-  <p>Show Bookings</p>
-  <table id = "ModuleUserTable" border="1px solid black">
+  <div class=tbl-title><h3>Bookings</h3>
+  <button class=btn style="color:black" onclick="addBooking(event, 'BookRoom')">Book Room</button>
+  </div>
+  <table class=tbl id = "ModuleUserTable" border="1px solid black">
   	
   </table>
   
 </div>
 
-<div id="AddRoom" class="tabcontent">
-  <h3>Add Room</h3>
-  <p>Add a new room</p>
-</div>
+
+<div id="ShowRooms" class="tabcontent">
+  <div class=tbl-title><h3>Meeting Rooms</h3></div>
+  <div id="roomDisplay"></div>
+   
+</div> 
 
 <div id="BookRoom" class="tabcontent">
   <h3>Book a room</h3>
@@ -111,7 +113,8 @@
 </div>
 
 <div id="Users" class="tabcontent">
-  <h3>Users</h3>
+  <div class=tbl-title><h3>Users</h3>
+  </div>
   <div id="userTable"></div>
 </div>
 

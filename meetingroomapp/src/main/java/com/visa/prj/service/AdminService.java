@@ -1,8 +1,10 @@
 package com.visa.prj.service;
 
 import java.util.Date;
+
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -217,6 +219,39 @@ public class AdminService {
 		}
 	}
 
+	public List<Room> getActiveRooms() {
+		// TODO Auto-generated method stub
+		try {
+			return roomDao.getActiveRooms();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+	
+	@Transactional
+	public void makePending(int id) {
+		Booking b = bookingDao.getOne(id);
+		
+		try {
+			b.setStatus(2);
+		} catch (Exception e) {
+			
+		}
+				
+	}
+	
+	@Transactional
+	public void makeConfirmed(int id) {
+		Booking b = bookingDao.getOne(id);
+		
+		try {
+			b.setStatus(1);
+		} catch (Exception e) {
+			
+		}
+	}
+				
 	public void addNewBooking(AddBooking addBooking) {
 		
 	}
@@ -229,6 +264,40 @@ public class AdminService {
 		}
 	}
 	
+	@Transactional
+	public void makeCancelled(int id) {
+		Booking b = bookingDao.getOne(id);
+		
+		try {
+			b.setStatus(3);
+		} catch (Exception e) {
+			
+		}
+	}
+				
+
+	
+	@Transactional
+	public void changeRoomStatus(Integer room_id) {
+		Room a = roomDao.getOne(room_id);
+		try {
+			a.setStatus(!a.isStatus());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public void deleteRoomById(int id) {
+		// TODO Auto-generated method stub
+		try {
+		
+				roomDao.deleteById(id);
+			
+		} catch (Exception e) {
+			
+		}
+		
+	}
 	
 	
 	

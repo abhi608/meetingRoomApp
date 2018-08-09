@@ -38,7 +38,7 @@ body {
 }
 
 .container {
-  max-width: 80%	;
+  max-width: 400px;
   width: 100%;
   margin: 0 auto;
   position: relative;
@@ -160,44 +160,22 @@ fieldset {
 </style>
 </head>
 
+    
 <body>
 <div class="container">  
-  <form id="contact" action="" method="post">
-    <h3>Personal Details</h3>
-    <h4>Please fill details for checkout</h4>
-    <fieldset>
-      <input placeholder="Your name" type="text" tabindex="1" required autofocus>
-    </fieldset>
-    <fieldset>
-      <input placeholder="Your Email" type="email" tabindex="2" required>
-    </fieldset>
-    <fieldset>
-      <input placeholder="Your Phone Number" type="tel" tabindex="3" required>
-    </fieldset>
-    <fieldset>
-      <input placeholder="Your Address" type="text" tabindex="4" required>
-    </fieldset>
-    <fieldset>
-      <select tabindex="5" required>
-      
-  <option style="color:#888" value="0" disabled selected hidden>Payment Method</option>
-        <option value="1">Cash</option>
-  <option value="2">Net Banking</option>
-  <option value="3">Credit/Debit Card</option>
-  <option value="4">PayTM</option>
-        
-      </select>
-
-    </fieldset>
-    <fieldset>
-      <textarea placeholder="Any Notes" tabindex="6" required></textarea>
-    </fieldset>
-    <fieldset>
-      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
-    </fieldset>
-    
-  </form>
+	 <form action="something.do" method="post" id="layout_equipment">
+	<div class="sub-container" id="layout"></div>
+	<br/>
+	<div class="sub-container" id="equipment"></div><br/>
+	<button type="submit" form="layout_equipment">next</button>
+	</form>
 </div>
+<script type="text/javascript" src="js/Client.js"></script>
+<script>
+	$(function(){
+		getUserRoomSetup();
+	})
+</script>
 	
 	
 </body>

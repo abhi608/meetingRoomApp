@@ -1,0 +1,26 @@
+<table class=tbl border="1px solid black">
+<tr>
+	<th>Image</th>
+	<th>Room</th>
+	<th>Capacity</th>
+	<th>Status</th>
+	<th>Options</th>
+</tr>
+{{#.}}
+<tr>
+<td><img src="#" alt="Panoramic Room"> </td>
+<td>{{name}}</td>
+<td> {{capacity}}</td>
+<td> {{status}}</td>
+<td>
+	<div>
+	<button type="button" name="{{id}}" class="deleteRoom" onclick='deleteRoom("{{id}}")'>Delete</button><br/>
+	
+	
+	
+	<button type="button" name="{{id}}" class="changeRoomStatus" onclick='changeRoomStatus("{{id}}")'>Switch</button>
+	</div>
+</td>
+</tr>
+{{/.}}
+</table>

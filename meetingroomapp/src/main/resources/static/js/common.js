@@ -19,6 +19,9 @@ function display(evt, cityName) {
         } else if(cityName == "Users"){
         	$("#usersTab").addClass("active");
         }
+        else if(cityName == "ShowRooms"){
+        	$("#showRoomsTab").addClass("active");
+        }
         //evt.currentTarget.className += " active";
 }
 
@@ -57,7 +60,30 @@ function openUsers(evt, cityName){
 			}
 			var content = Mustache.render(usersTempl$, users);
 			$("#userTable").empty();
-			$('#userTable').html(content);
+			$("#userTable").html(content);
+			display(evt, cityName);
+		
+		});
+	 });
+}
+function openRooms(evt, cityName){
+	var roomTempl$;
+	$.get("templates/showRooms.html",function(templ) {
+		roomTempl$ = templ;
+		$.getJSON("http://localhost:8080/api/room", function(rooms) {
+			for(var i=0; i<rooms.length; i++){
+				if('status' in rooms[i]){
+					if(rooms[i].status){
+						rooms[i].status = "Active";
+						
+					} else{
+						rooms[i].status = "Inactive";
+					}
+				}
+			}
+			var content = Mustache.render(roomTempl$, rooms);
+			$("#roomDisplay").empty();
+			$('#roomDisplay').html(content);
 			display(evt, cityName);
 		
 		});
@@ -74,7 +100,22 @@ function deleteAdmin(email){
 	    }
 	});
 }
+function deleteRoom(id){
+	var url = "/api/room/" + id;
+	
+	$.ajax({
+	    url: url,
+	    type: 'DELETE',
+	    success: function(message) {
+	    	if(message == null){
+	    		openRooms(null, "ShowRooms");
+	    	}else{
+	    		alert(message);
+	    	}
+	    }
 
+	});
+}
 function changeAdminStatus(email){
 	var url = "/api/changeAdminStatus/" + email;
 	var data = {};
@@ -90,12 +131,85 @@ function changeAdminStatus(email){
     });
 }
 
+function changeRoomStatus(room_id){
+	var url = "/api/changeRoomStatus/" + room_id;
+	var data = {};
+	console.log(data);
+	$.ajax({
+        type: 'PUT',
+        url: url,
+        data: JSON.stringify(data),
+        contentType:"application/json",
+        success: function (message) {
+        	openRooms(null, "ShowRooms");
+        }
+    });
+}
+
+function makePending(id){
+	var url = "/api/makePending/" + id;
+	var data = {};
+	console.log(data);
+	$.ajax({
+        type: 'PUT',
+        url: url,
+        data: JSON.stringify(data),
+        contentType:"application/json",
+        success: function (message) {
+        	openBookings(null, "Bookings");
+        }
+    });
+}
+
+function makeConfirmed(id){
+	var url = "/api/makeConfirmed/" + id;
+	var data = {};
+	console.log(data);
+	$.ajax({
+        type: 'PUT',
+        url: url,
+        data: JSON.stringify(data),
+        contentType:"application/json",
+        success: function (message) {
+        	openBookings(null, "Bookings");
+        }
+    });
+}
+
+function makeCancelled(id){
+	var url = "/api/makeCancelled/" + id;
+	var data = {};
+	console.log(data);
+	$.ajax({
+        type: 'PUT',
+        url: url,
+        data: JSON.stringify(data),
+        contentType:"application/json",
+        success: function (message) {
+        	openBookings(null, "Bookings");
+        }
+    });
+}
+
 function openBookings(evt, cityName){
 	
 	var bksTempl$;
 	$.get("templates/booking.html",function(templ) {
 		bksTempl$ = templ;
 		$.getJSON("http://localhost:8080/api/bookings", function(books) {
+			for(var i=0; i<books.length; i++){
+				if('status' in books[i]){
+					if(books[i].status==1){
+						books[i].status = "Confirmed";
+						
+					} else if(books[i].status==2){
+						books[i].status = "Pending";
+					}
+					else{
+						books[i].status = "Cancelled";
+					}
+				}
+			}
 			var content = Mustache.render(bksTempl$, books);
 			$('#ModuleUserTable').empty();
 			$('#ModuleUserTable').append(content);
@@ -209,6 +323,8 @@ function typeCheck(that) {
     	document.getElementById("perhour").style.display = "none";
     }
 }
+
+
 
 function openDashboard(evt, cityName){
 	var dashboard1$ = $("#dashboard1");

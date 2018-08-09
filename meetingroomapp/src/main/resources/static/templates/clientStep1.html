@@ -1,0 +1,16 @@
+<h3>Step1 - Meeting Rooms</h3>
+ <div class="container">
+ 	{{#.}}
+ 	<form id="contact">
+	<div class="card">
+	  <img class="card-img-top" src="#" alt="Card image cap">
+	  <div class="card-body">
+	  	<h3 class="card-text">{{name}}</h3><br/>
+	  	<p class="card-text">{{description}}</p><br/>
+	  	<button type="button" onclick='submitStep1(1, "{{id}}", "{{name}}")'>Book This Room</button>
+	  	
+	  </div>
+	</div>
+	</form>
+	{{/.}}
+ </div>

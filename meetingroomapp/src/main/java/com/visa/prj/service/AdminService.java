@@ -3,6 +3,7 @@ package com.visa.prj.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -271,6 +272,27 @@ public class AdminService {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	}
+
+	public void deleteRoomById(int id) {
+		// TODO Auto-generated method stub
+		try {
+			
+			//List<Booking > bk= bookingDao.getBookingByRoom(id);
+			
+			//System.out.println(bk);
+			// If no booking for this room, then delete the room
+			//if(bk==null) {
+				roomDao.deleteById(id);
+			//}
+			//else {
+				//JOptionPane.showMessageDialog(null, "Room cannot be deleted as there are bookings associated with this room!!");
+			//}
+			
+		} catch (Exception e) {
+			System.out.println("error aaya tha");
+		}
+		
 	}
 	
 	

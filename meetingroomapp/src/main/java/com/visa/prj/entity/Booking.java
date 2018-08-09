@@ -28,6 +28,7 @@ public class Booking {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date bookingDate = new Date();
 	
+	
 	@ManyToOne
 	@JoinColumn(name="room_fk")
 	private Room room;

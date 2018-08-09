@@ -4,6 +4,7 @@
   		<th>Name</th>
   		<th>Amount</th>
   		<th>Status</th>
+  		<th>Status Change</th>
   	</tr>
 {{#.}}
 <tr>
@@ -12,5 +13,12 @@
 <td> {{client.name}}</td>
 <td> {{amount}}</td>
 <td> {{status}}</td>
+<td>
+	<div class=tbl-btn>
+	<button type="button" name="{{id}}" class="editStatus" onclick='makePending("{{id}}")'>Pending</button><br/>
+	<button type="button" name="{{id}}" class="editStatus" onclick='makeConfirmed("{{id}}")'>Confirmed</button><br/>
+	<button type="button" name="{{id}}" class="editStatus" onclick='makeCancelled("{{id}}")'>Cancelled</button><br/>
+	</div>
+</td>
 </tr>
 {{/.}}

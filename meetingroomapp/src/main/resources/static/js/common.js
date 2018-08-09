@@ -90,11 +90,69 @@ function changeAdminStatus(email){
     });
 }
 
+function makePending(id){
+	var url = "/api/makePending/" + id;
+	var data = {};
+	console.log(data);
+	$.ajax({
+        type: 'PUT',
+        url: url,
+        data: JSON.stringify(data),
+        contentType:"application/json",
+        success: function (message) {
+        	openBookings(null, "Bookings");
+        }
+    });
+}
+
+function makeConfirmed(id){
+	var url = "/api/makeConfirmed/" + id;
+	var data = {};
+	console.log(data);
+	$.ajax({
+        type: 'PUT',
+        url: url,
+        data: JSON.stringify(data),
+        contentType:"application/json",
+        success: function (message) {
+        	openBookings(null, "Bookings");
+        }
+    });
+}
+
+function makeCancelled(id){
+	var url = "/api/makeCancelled/" + id;
+	var data = {};
+	console.log(data);
+	$.ajax({
+        type: 'PUT',
+        url: url,
+        data: JSON.stringify(data),
+        contentType:"application/json",
+        success: function (message) {
+        	openBookings(null, "Bookings");
+        }
+    });
+}
+
 function openBookings(evt, cityName){
 	var bksTempl$;
 	$.get("templates/booking.html",function(templ) {
 		bksTempl$ = templ;
 		$.getJSON("http://localhost:8080/api/bookings", function(books) {
+			for(var i=0; i<books.length; i++){
+				if('status' in books[i]){
+					if(books[i].status==1){
+						books[i].status = "Confirmed";
+						
+					} else if(books[i].status==2){
+						books[i].status = "Pending";
+					}
+					else{
+						books[i].status = "Cancelled";
+					}
+				}
+			}
 			var content = Mustache.render(bksTempl$, books);
 			$('#ModuleUserTable').empty();
 			$('#ModuleUserTable').append(content);

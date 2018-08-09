@@ -29,8 +29,14 @@ public class MeetingRoomController {
 	
 	
 	@RequestMapping(value="api/changeRoomStatus/{id}",method=RequestMethod.PUT)
-	public ResponseEntity<String> updateRoom(@PathVariable("id") Integer room_id) {
-		adminService.changeRoomStatus(room_id);
-		return new ResponseEntity<String>("Room with id " + room_id + " updated !!!",HttpStatus.OK);
+	public ResponseEntity<String> updateRoom(@PathVariable("id") Integer id) {
+		adminService.changeRoomStatus(id);
+		return new ResponseEntity<String>("Room with id " + id + " updated !!!",HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="api/room/{id}",method=RequestMethod.DELETE)
+	public ResponseEntity<String> deleteRoom(@PathVariable("id") int id) {
+		adminService.deleteRoomById(id);
+		return new ResponseEntity<String>("Admin with id " + id + " deleted !!!",HttpStatus.OK);
 	}
 }

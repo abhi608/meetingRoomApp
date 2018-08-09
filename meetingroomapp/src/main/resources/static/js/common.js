@@ -20,7 +20,7 @@ function display(evt, cityName) {
         	$("#usersTab").addClass("active");
         }
         else if(cityName == "ShowRooms"){
-        	$("#addRoomTab").addClass("active");
+        	$("#showRoomsTab").addClass("active");
         }
         //evt.currentTarget.className += " active";
 }
@@ -60,7 +60,7 @@ function openUsers(evt, cityName){
 			}
 			var content = Mustache.render(usersTempl$, users);
 			$("#userTable").empty();
-			$('#userTable').html(content);
+			$("#userTable").html(content);
 			display(evt, cityName);
 		
 		});
@@ -82,8 +82,8 @@ function openRooms(evt, cityName){
 				}
 			}
 			var content = Mustache.render(roomTempl$, rooms);
-			$("#RoomDisplayTable").empty();
-			$('#RoomDisplayTable').html(content);
+			$("#roomDisplay").empty();
+			$('#roomDisplay').html(content);
 			display(evt, cityName);
 		
 		});
@@ -100,7 +100,17 @@ function deleteAdmin(email){
 	    }
 	});
 }
-
+function deleteRoom(id){
+	var url = "/api/room/" + id;
+	
+	$.ajax({
+	    url: url,
+	    type: 'DELETE',
+	    success: function(message) {
+	        openRooms(null, "ShowRooms");
+	    }
+	});
+}
 function changeAdminStatus(email){
 	var url = "/api/changeAdminStatus/" + email;
 	var data = {};
@@ -115,9 +125,8 @@ function changeAdminStatus(email){
         }
     });
 }
-function changeRoomStatus(room_id){
-	console.log("xnaskjcnas");
-	var url = "/api/changeRoomStatus/" + room_id;
+function changeRoomStatus(id){
+	var url = "/api/changeRoomStatus/" + id;
 	var data = {};
 	console.log(data);
 	$.ajax({
@@ -126,8 +135,7 @@ function changeRoomStatus(room_id){
         data: JSON.stringify(data),
         contentType:"application/json",
         success: function (message) {
-        	openRooms(null, "" +
-        			"");
+        	openRooms(null, "ShowRooms");
         }
     });
 }

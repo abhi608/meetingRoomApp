@@ -19,6 +19,9 @@ function display(evt, cityName) {
         } else if(cityName == "Users"){
         	$("#usersTab").addClass("active");
         }
+        else if(cityName == "AddRoom"){
+        	$("#addRoomTab").addClass("active");
+        }
         //evt.currentTarget.className += " active";
 }
 
@@ -58,6 +61,29 @@ function openUsers(evt, cityName){
 			var content = Mustache.render(usersTempl$, users);
 			$("#userTable").empty();
 			$('#userTable').html(content);
+			display(evt, cityName);
+		
+		});
+	 });
+}
+function openRooms(evt, cityName){
+	var roomTempl$;
+	$.get("templates/showRooms.html",function(templ) {
+		roomTempl$ = templ;
+		$.getJSON("http://localhost:8080/api/admins", function(rooms) {
+			for(var i=0; i<rooms.length; i++){
+				if('status' in rooms[i]){
+					if(rooms[i].status){
+						rooms[i].status = "Active";
+						
+					} else{
+						rooms[i].status = "Inactive";
+					}
+				}
+			}
+			var content = Mustache.render(roomTempl$, rooms);
+			$("#RoomDisplayTable").empty();
+			$('#RoomDisplayTable').html(content);
 			display(evt, cityName);
 		
 		});

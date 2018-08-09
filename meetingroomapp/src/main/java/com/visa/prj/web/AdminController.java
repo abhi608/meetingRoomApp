@@ -26,7 +26,7 @@ public class AdminController {
 			if(admin.getPassword().equals(password) && admin.isStatus()) {
 				HttpSession ses = req.getSession();
 				ses.setAttribute("user", email);
-				return "redirect:dashboardView.html?msg=login_success";
+				return "redirect:commonView.html?msg=login_success";
 			} else if(!admin.getPassword().equals(password)) {
 				return "redirect:adminLoginView.html?msg=Invalid Email/password";
 			} else {

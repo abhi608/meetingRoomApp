@@ -80,8 +80,16 @@ public class BookingController {
 			toTime = addBooking.getTotime();
 		}else if (type==2) {
 			String slot= addBooking.getSlot();
+			if(slot.equals("morning")){
+				fromTime="09:00";
+				toTime="13:00";
+			}else if(slot.equals("afternoon")){
+				fromTime="14:00";
+				toTime="18:00";
+			}
 		}else {
-			
+			fromTime="09:00";
+			toTime="18:00";
 		}
 		
 		
@@ -101,6 +109,18 @@ public class BookingController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		
+		booking.setStatus(2);
+		String roomId= addBooking.getRoom();
+		String layoutId = addBooking.getLayout();
+		
+		Room room = adminService.getRoomById(Integer.parseInt(roomId));
+		Layout layout = adminService.getLayoutById(Integer.parseInt(layoutId));
+		
+		booking.setRoom(room);
+		booking.setLayout(layout);
+		
+		
 		
 		
 		

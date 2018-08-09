@@ -220,6 +220,14 @@ public class AdminService {
 	public void addNewBooking(AddBooking addBooking) {
 		
 	}
+
+	public Layout getLayoutById(int id) {
+		try {
+			return layoutDao.findById(id).get();
+			}catch(Exception e) {
+				return null;
+		}
+	}
 	
 	
 	

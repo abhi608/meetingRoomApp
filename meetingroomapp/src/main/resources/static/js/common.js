@@ -127,8 +127,9 @@ function changeAdminStatus(email){
 }
 
 function changeRoomStatus(room_id){
-	console.log("xnaskjcnas");
 	var url = "/api/changeRoomStatus/" + room_id;
+	var data = {};
+	console.log(data);
 	$.ajax({
         type: 'PUT',
         url: url,

@@ -107,8 +107,13 @@ function deleteRoom(id){
 	    url: url,
 	    type: 'DELETE',
 	    success: function(message) {
-	        openRooms(null, "ShowRooms");
+	    	if(message == null){
+	    		openRooms(null, "ShowRooms");
+	    	}else{
+	    		alert(message);
+	    	}
 	    }
+
 	});
 }
 function changeAdminStatus(email){

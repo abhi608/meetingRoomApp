@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.visa.prj.dao.BookingDao;
+import com.visa.prj.entity.Booking;
 import com.visa.prj.entity.Room;
 import com.visa.prj.service.AdminService;
 
@@ -23,6 +25,9 @@ public class MeetingRoomController {
 	
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private BookingDao bookingDao;
 	
 	@RequestMapping(value="api/getMeetingRooms",method=RequestMethod.GET)
 	public @ResponseBody List<Room> getRooms() {
@@ -48,7 +53,14 @@ public class MeetingRoomController {
 	
 	@RequestMapping(value="api/room/{id}",method=RequestMethod.DELETE)
 	public ResponseEntity<String> deleteRoom(@PathVariable("id") int id) {
-		adminService.deleteRoomById(id);
-		return new ResponseEntity<String>("Admin with id " + id + " deleted !!!",HttpStatus.OK);
+		List<Booking > bk= bookingDao.getBookingByRoom(id);
+		
+		// If no booking for this room, then delete the room
+		if(bk==null) {
+			adminService.deleteRoomById(id);
+			return null;
+		}else {
+			return new ResponseEntity<String>("Room cannot be deleted as it has bookings present !!!",HttpStatus.OK);
+		}
 	}
 }

@@ -184,6 +184,8 @@ function typeCheck(that) {
     }
 }
 
+
+
 function openDashboard(evt, cityName){
 	var dashboard1$ = $("#dashboard1");
 	var template1 = "templates/dashboard1.html";

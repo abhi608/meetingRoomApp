@@ -14,6 +14,13 @@
 <td>
 	<div>
 	<button type="button" name="{{name}}" class="deleteRoom" onclick='deleteAdmin("{{name}}")'>Delete</button><br/>
+	
+	<select>
+	<option value="{{name}}">Active</option>
+	<option value="{{name}}">Inactive</option>
+	
+	</select>
+	
 	<button type="button" name="{{name}}" class="changeRoomStatus" onclick='changeAdminStatus("{{name}}")'>Switch Status</button>
 	</div>
 </td>

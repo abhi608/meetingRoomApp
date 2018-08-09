@@ -15,7 +15,7 @@
 <div class="tab">
   <button class="tablinks" onclick="openDashboard(event, 'Dashboard')" id="defaultOpen">Dashboard</button>
   <button class="tablinks" onclick="openBookings(event, 'Bookings')" id="bookingsTab">Bookings</button>
-  <button class="tablinks" onclick="openRooms(event, 'ShowRoom')">Show Room</button>
+  <button class="tablinks" onclick="openRooms(event, 'ShowRooms')">Show Room</button>
   <button class="tablinks" onclick="addBooking(event, 'BookRoom')" id="addBookingTab">Book Room</button>
   <button class="tablinks" onclick="openCity(event, 'Equipments')">Equipments</button>
   <button class="tablinks" onclick="openUsers(event, 'Users')" id="usersTab">Users</button>
@@ -59,14 +59,12 @@
 
 <div id="ShowRooms" class="tabcontent">
   <h3>Meeting Rooms</h3>
-  <form action="api/getMeetingRooms" method="post">	
   <p>Display the room</p>
    <table id = "RoomDisplayTable" border="1px solid black">
   	<tr>
   		<th>Image</th>
   		<th>Room</th>
   		<th>Capacity</th>
-  		<th>Status</th>
   		<th>Status</th>
   	</tr>
   </table>

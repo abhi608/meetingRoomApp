@@ -19,7 +19,7 @@ function display(evt, cityName) {
         } else if(cityName == "Users"){
         	$("#usersTab").addClass("active");
         }
-        else if(cityName == "AddRoom"){
+        else if(cityName == "ShowRooms"){
         	$("#addRoomTab").addClass("active");
         }
         //evt.currentTarget.className += " active";

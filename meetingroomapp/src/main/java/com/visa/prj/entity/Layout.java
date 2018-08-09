@@ -1,5 +1,6 @@
 package com.visa.prj.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,13 +16,17 @@ public class Layout {
 	private int id;
 	
 	private String name;
+	
+	@Column(name="img_src")
+	private String imgSrc;
 
 	public Layout() {
 	}
 
-	public Layout(int id, String name) {
+	public Layout(int id, String name, String imgSrc) {
 		this.id = id;
 		this.name = name;
+		this.imgSrc = imgSrc;
 	}
 
 	public int getId() {
@@ -39,7 +44,13 @@ public class Layout {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
+	public String getImgSrc() {
+		return imgSrc;
+	}
+
+	public void setImgSrc(String imgSrc) {
+		this.imgSrc = imgSrc;
+	}
 	
 }

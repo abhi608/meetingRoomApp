@@ -3,16 +3,16 @@
                                 <h5 class="card-title">Reservations</h5>
                                 <hr>
                                 <input type="date" name="date" id="reservationDate" value="" required>
-                                <button type="button" id="reservationBtn">Search</button><br/>
+                                <button type="button" class="btn btn-primary" id="reservationBtn">Search</button><br/>
                                 <hr>
                                 {{#.}}
                                 <div class="card-text">
-                                        <p>{{room.name}}</p>
+                                		<img class="card-img-top" src="{{room.imgSrc}}" width="400px" height="250px" alt="Card image cap">
+                                        <h4><b>{{room.name}}</b></h4>
                                         <p>{{client.name}}</p>
                                         <p>{{fromDate}} - {{toDate}}</p>
                                 </div>
-                                <br/>
-                                <hr>
+                               	<hr style="border-color:black;">
                                 {{/.}}
                         </div>
               </div>

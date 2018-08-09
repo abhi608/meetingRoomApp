@@ -29,13 +29,15 @@ public class Room {
 	
 	private String description;
 	
+	@Column(name="img_src")
+	private String imgSrc;
 	
 	public Room() {
 	}
 
 
 	public Room(int id, String name, int capacity, boolean status, double hourPrice, double halfDayPrice,
-			double fullDayPrice, String description) {
+			double fullDayPrice, String description, String imgSrc) {
 		this.id = id;
 		this.name = name;
 		this.capacity = capacity;
@@ -44,6 +46,7 @@ public class Room {
 		this.halfDayPrice = halfDayPrice;
 		this.fullDayPrice = fullDayPrice;
 		this.description = description;
+		this.imgSrc = imgSrc;
 	}
 
 
@@ -125,10 +128,15 @@ public class Room {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
-	
-	
-	
 
+
+	public String getImgSrc() {
+		return imgSrc;
+	}
+
+
+	public void setImgSrc(String imgSrc) {
+		this.imgSrc = imgSrc;
+	}
+	
 }

@@ -1,4 +1,4 @@
-package com.visa.prj.entity;
+package com.visa.prj.view;
 
 import java.util.List;
 

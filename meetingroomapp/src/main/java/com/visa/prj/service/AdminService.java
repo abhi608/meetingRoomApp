@@ -16,7 +16,7 @@ import com.visa.prj.dao.ClientDao;
 import com.visa.prj.dao.EquipmentDao;
 import com.visa.prj.dao.LayoutDao;
 import com.visa.prj.dao.RoomDao;
-import com.visa.prj.entity.AddBooking;
+import com.visa.prj.view.AddBooking;
 import com.visa.prj.entity.Admin;
 import com.visa.prj.entity.Booking;
 import com.visa.prj.entity.Client;

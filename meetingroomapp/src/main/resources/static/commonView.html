@@ -16,9 +16,8 @@
 <div class="tab">
   <button class="tablinks" onclick="openDashboard(event, 'Dashboard')" id="defaultOpen">Dashboard</button>
   <button class="tablinks" onclick="openBookings(event, 'Bookings')" id="bookingsTab">Bookings</button>
-  <button class="tablinks" onclick="openRooms(event, 'ShowRooms')"  >Show Room</button>
+  <button class="tablinks" onclick="openRooms(event, 'ShowRooms')"  id="showRoomsTab">Show Room</button>
   <button class="tablinks" onclick="addBooking(event, 'BookRoom')" id="addBookingTab">Book Room</button>
-  <button class="tablinks" onclick="openCity(event, 'Equipments')">Equipments</button>
   <button class="tablinks" onclick="openUsers(event, 'Users')" id="usersTab">Users</button>
 </div>
 
@@ -38,7 +37,7 @@
 
 <div id="Bookings" class="tabcontent">
   <div class=tbl-title><h3>Bookings</h3>
-  <button class=btn style="color:black" onclick="addBooking(event, 'BookRoom')">Book Room</button>
+  <button class="btn btn-primary" style="color:black" onclick="addBooking(event, 'BookRoom')">Book Room</button>
   </div>
   <table class=tbl id = "ModuleUserTable" border="1px solid black">
   	
@@ -105,11 +104,6 @@
  	<button type="submit" id="addBookButton">Add Booking</button>
  	
   </form>
-</div>
-
-<div id="Equipments" class="tabcontent">
-  <h3>Equipments</h3>
-  <p>Show Equipments</p> 
 </div>
 
 <div id="Users" class="tabcontent">

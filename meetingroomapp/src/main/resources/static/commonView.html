@@ -41,13 +41,7 @@
   <button onclick="addBooking(event, 'BookRoom')">Book Room</button>
   <p>Show Bookings</p>
   <table id = "ModuleUserTable" border="1px solid black">
-  	<tr>
-  		<th>Room</th>
-  		<th>Date</th>
-  		<th>Name</th>
-  		<th>Amount</th>
-  		<th>Status</th>
-  	</tr>
+  	
   </table>
   
 </div>
@@ -59,19 +53,19 @@
 
 <div id="BookRoom" class="tabcontent">
   <h3>Book a room</h3>
-  <form action="api/addbook" method="post">
-	<label> Date: <input type="date" name="tbdate" placeholder="tbdate"> </label> <br/>
+  <form>
+	<label> Date: <input type="date" id="tbdate" name="tbdate" placeholder="tbdate"> </label> <br/>
 	<label> Type: 
-		<select onchange="typeCheck(this);" id="type">
-   			<option value="fullday">Full Day</option>
-   			<option value="halfday">Half Day</option>
-   			<option value="perhour">Per Hour</option>
+		<select onchange="typeCheck(this);" id="type" name="type">
+   			<option value=3>Full Day</option>
+   			<option value=2>Half Day</option>
+   			<option value=1>Per Hour</option>
  		</select>
  	</label> <br/>
  	
  	<div id="halfday" style="display: none;">
     	<label> Chose slot: 
-    		<select id="slot">
+    		<select id="slot" name="slot">
    				<option value="morning">9 AM TO 1 PM</option>
    				<option value="afternoon">2 PM to 6 PM</option>
  			</select>
@@ -79,23 +73,35 @@
     </div>
     
     <div id="perhour" style="display: none;">
-    	<label> From Time: <input type="time" name="fromtime" placeholder="fromtime"> </label>
-		<label> To Time: <input type="time" name="totime" placeholder="totime"> </label>
+    	<label> From Time: <input type="time" id="fromtime" name="fromtime" placeholder="fromtime"> </label>
+		<label> To Time: <input type="time" id="totime" name="totime" placeholder="totime"> </label>
     </div>
     
 	    
     <label> Room:
-    	<select id=room>
+    	<select id="room" name="room">
     	</select>
     </label><br/>
     
     <label> Layout:
-    	<select id=layout>
+    	<select id="layout" name="layout">
     	</select>
     </label>
     
-    <h2> Chose Equipments </h2>
- 	<button type="submit" >Add Booking</button>
+    <h2> Chose Equipments</h2>
+ 	<table id = "bookEquimentTable"  border="1px solid black">
+ 	</table>
+ 	
+ 	<h2> User Details </h2>
+ 	
+ 	<label> Email: <input type="text" id="useremail" name="useremail"></label> <br/>
+ 	<label> Name: <input type="text" id="username" name="username"></label><br/>
+ 	<label> Phone: <input type="text" id="userphone" name="userphone"></label><br/>
+ 	<label> Address: <input type="text" id="useraddress" name="useraddress"></label><br/>
+ 	
+ 	
+ 	<button type="submit" id="addBookButton">Add Booking</button>
+ 	
   </form>
 </div>
 

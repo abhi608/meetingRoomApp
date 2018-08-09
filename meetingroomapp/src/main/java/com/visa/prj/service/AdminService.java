@@ -14,6 +14,7 @@ import com.visa.prj.dao.ClientDao;
 import com.visa.prj.dao.EquipmentDao;
 import com.visa.prj.dao.LayoutDao;
 import com.visa.prj.dao.RoomDao;
+import com.visa.prj.entity.AddBooking;
 import com.visa.prj.entity.Admin;
 import com.visa.prj.entity.Booking;
 import com.visa.prj.entity.Client;
@@ -214,6 +215,10 @@ public class AdminService {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	}
+
+	public void addNewBooking(AddBooking addBooking) {
+		
 	}
 	
 	

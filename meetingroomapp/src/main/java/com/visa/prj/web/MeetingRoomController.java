@@ -44,9 +44,9 @@ public class MeetingRoomController {
 		List<Booking > bk= bookingDao.getBookingByRoom(id);
 		
 		// If no booking for this room, then delete the room
-		if(bk==null) {
+		if(bk.size()==0) {
 			adminService.deleteRoomById(id);
-			return null;
+			return new ResponseEntity<String>("",HttpStatus.OK);
 		}else {
 			return new ResponseEntity<String>("Room cannot be deleted as it has bookings present !!!",HttpStatus.OK);
 		}

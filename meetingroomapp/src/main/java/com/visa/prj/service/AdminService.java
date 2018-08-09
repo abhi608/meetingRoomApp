@@ -224,9 +224,44 @@ public class AdminService {
 			// TODO: handle exception
 			return null;
 		}
-		
-		
 	}
+	
+	@Transactional
+	public void makePending(int id) {
+		Booking b = bookingDao.getOne(id);
+		
+		try {
+			b.setStatus(2);
+		} catch (Exception e) {
+			
+		}
+				
+	}
+	
+	@Transactional
+	public void makeConfirmed(int id) {
+		Booking b = bookingDao.getOne(id);
+		
+		try {
+			b.setStatus(1);
+		} catch (Exception e) {
+			
+		}
+				
+	}
+	
+	@Transactional
+	public void makeCancelled(int id) {
+		Booking b = bookingDao.getOne(id);
+		
+		try {
+			b.setStatus(3);
+		} catch (Exception e) {
+			
+		}
+	}
+				
+
 	
 	@Transactional
 	public void changeRoomStatus(Integer room_id) {

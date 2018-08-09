@@ -96,6 +96,7 @@ function openBookings(evt, cityName){
 		bksTempl$ = templ;
 		$.getJSON("http://localhost:8080/api/bookings", function(books) {
 			var content = Mustache.render(bksTempl$, books);
+			$('#ModuleUserTable').empty();
 			$('#ModuleUserTable').append(content);
 			display(evt, cityName);
 		

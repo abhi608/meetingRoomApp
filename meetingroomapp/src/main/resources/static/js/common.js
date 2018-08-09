@@ -70,7 +70,7 @@ function openRooms(evt, cityName){
 	var roomTempl$;
 	$.get("templates/showRooms.html",function(templ) {
 		roomTempl$ = templ;
-		$.getJSON("http://localhost:8080/api/admins", function(rooms) {
+		$.getJSON("http://localhost:8080/api/room", function(rooms) {
 			for(var i=0; i<rooms.length; i++){
 				if('status' in rooms[i]){
 					if(rooms[i].status){
@@ -115,7 +115,22 @@ function changeAdminStatus(email){
         }
     });
 }
-
+function changeRoomStatus(room_id){
+	console.log("xnaskjcnas");
+	var url = "/api/changeRoomStatus/" + room_id;
+	var data = {};
+	console.log(data);
+	$.ajax({
+        type: 'PUT',
+        url: url,
+        data: JSON.stringify(data),
+        contentType:"application/json",
+        success: function (message) {
+        	openRooms(null, "" +
+        			"");
+        }
+    });
+}
 function openBookings(evt, cityName){
 	var bksTempl$;
 	$.get("templates/booking.html",function(templ) {

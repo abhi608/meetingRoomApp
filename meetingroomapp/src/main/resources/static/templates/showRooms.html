@@ -13,15 +13,15 @@
 <td> {{status}}</td>
 <td>
 	<div>
-	<button type="button" name="{{name}}" class="deleteRoom" onclick='deleteAdmin("{{name}}")'>Delete</button><br/>
+	<button type="button" name="{{id}}" class="deleteRoom" onclick='deleteRoom("{{id}}")'>Delete</button><br/>
 	
 	<select>
-	<option value="{{name}}">Active</option>
-	<option value="{{name}}">Inactive</option>
+	<option value="{{id}}">Active</option>
+	<option value="{{id}}">Inactive</option>
 	
 	</select>
 	
-	<button type="button" name="{{name}}" class="changeRoomStatus" onclick='changeAdminStatus("{{name}}")'>Switch Status</button>
+	<button type="button" name="{{id}}" class="changeRoomStatus" onclick='changeRoomStatus("{{id}}")'>Switch Status</button>
 	</div>
 </td>
 </tr>

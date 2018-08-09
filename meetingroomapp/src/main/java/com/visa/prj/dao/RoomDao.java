@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.visa.prj.entity.Room;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 public interface RoomDao extends JpaRepository<Room,Integer>{
 
 	

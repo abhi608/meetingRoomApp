@@ -1,36 +1,39 @@
-<h3>Step2 - Book Room</h3>
+<h3>Step 2 - Book Room</h3>
  <div class="container">
  	<form id="contact">
 	<div class="card">
 	  <img class="card-img-top" src="#" alt="Card image cap">
-	  <div class="card-body">
-	  	<input type="date" name="date" id="reservationDate" value="" required><br/>
-	  	Duration: <select id="selectDuration" onchange="showHour()">
-	  		<option value="0">Hour</option>
-	  		<option value="1">Half Day</option>
-	  		<option value="2">Full Day</option>
-	  	</select>
-	  	<br/>
-	  	<div id="selectHour"></div>
-	  	{{#.}}
-	  	<h3 class="card-text">{{name}}</h3><br/>
+	  {{#.}}
+	  	<h3 class="card-text">{{roomName}}</h3><br/>
 	  	{{/.}}
-	  	
+	  <div class="card-body">
+	  	<label> Date: <input type="date" id="tbdate" name="tbdate" placeholder="tbdate"> </label> <br/>
+	<label> Type: 
+		<select onchange="typeCheck(this);" id="type" name="type">
+			<option style="color:#888" value="0" disabled selected hidden>Type of Booking</option>
+   			<option value=3>Full Day</option>
+   			<option value=2>Half Day</option>
+   			<option value=1>Per Hour</option>
+ 		</select>
+ 	</label> <br/>
+ 	
+ 	<div id="halfday" style="display: none;">
+    	<label> Chose slot: 
+    		<select id="slot" name="slot">
+   				<option value="morning">9 AM TO 1 PM</option>
+   				<option value="afternoon">2 PM to 6 PM</option>
+ 			</select>
+ 		</label> <br/>
+    </div>
+    
+    <div id="perhour" style="display: none;">
+    	<label> From Time: <input type="time" id="fromtime" name="fromtime" placeholder="fromtime"> </label>
+		<label> To Time: <input type="time" id="totime" name="totime" placeholder="totime"> </label>
+    </div>
+	  <button type="button" onclick="submitStep2(2)">Next</button>
 	  	
 	  </div>
 	</div>
 	</form>
  </div>
- <script>
- 	function showHour(){
- 		var duration = $("#selectDuration").val();
- 		if(duration == "0"){
- 			var selectHour$ = $("#selectHour");
- 			selectHour$.empty();
- 			$.get("templates/clientSelectHour.html", function(temp1){
- 				selectHour$.html(temp1);
- 				
- 			});
- 		}
- 	}
- </script>
+ <script type="text/javascript" src="js/common.js"></script>

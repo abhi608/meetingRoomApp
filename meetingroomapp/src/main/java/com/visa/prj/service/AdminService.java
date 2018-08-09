@@ -228,6 +228,15 @@ public class AdminService {
 		
 	}
 	
+	@Transactional
+	public void changeRoomStatus(Integer room_id) {
+		Room a = roomDao.getOne(room_id);
+		try {
+			a.setStatus(!a.isStatus());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 	
 	
 	

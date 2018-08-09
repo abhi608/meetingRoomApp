@@ -19,6 +19,9 @@ function display(evt, cityName) {
         } else if(cityName == "Users"){
         	$("#usersTab").addClass("active");
         }
+        else if(cityName == "ShowRooms"){
+        	$("#addRoomTab").addClass("active");
+        }
         //evt.currentTarget.className += " active";
 }
 
@@ -63,6 +66,29 @@ function openUsers(evt, cityName){
 		});
 	 });
 }
+function openRooms(evt, cityName){
+	var roomTempl$;
+	$.get("templates/showRooms.html",function(templ) {
+		roomTempl$ = templ;
+		$.getJSON("http://localhost:8080/api/room", function(rooms) {
+			for(var i=0; i<rooms.length; i++){
+				if('status' in rooms[i]){
+					if(rooms[i].status){
+						rooms[i].status = "Active";
+						
+					} else{
+						rooms[i].status = "Inactive";
+					}
+				}
+			}
+			var content = Mustache.render(roomTempl$, rooms);
+			$("#RoomDisplayTable").empty();
+			$('#RoomDisplayTable').html(content);
+			display(evt, cityName);
+		
+		});
+	 });
+}
 
 function deleteAdmin(email){
 	var url = "/api/admin/" + email;
@@ -89,7 +115,22 @@ function changeAdminStatus(email){
         }
     });
 }
-
+function changeRoomStatus(room_id){
+	console.log("xnaskjcnas");
+	var url = "/api/changeRoomStatus/" + room_id;
+	var data = {};
+	console.log(data);
+	$.ajax({
+        type: 'PUT',
+        url: url,
+        data: JSON.stringify(data),
+        contentType:"application/json",
+        success: function (message) {
+        	openRooms(null, "" +
+        			"");
+        }
+    });
+}
 function openBookings(evt, cityName){
 	var bksTempl$;
 	$.get("templates/booking.html",function(templ) {

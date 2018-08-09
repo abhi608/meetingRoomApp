@@ -1,24 +1,24 @@
 <tr>
-  		<th>Room</th>
-  		<th>Date</th>
-  		<th>Name</th>
-  		<th>Amount</th>
-  		<th>Status</th>
-  		<th>Status Change</th>
-  	</tr>
+ 		<th>Room</th>
+ 		<th>Date</th>
+ 		<th>Name</th>
+ 		<th>Amount</th>
+ 		<th>Status</th>
+ 		<th>Status Change</th>
+</tr>
 {{#.}}
 <tr>
-<td>{{room.name}}</td>
-<td> {{fromDate}}</td>
-<td> {{client.name}}</td>
-<td> {{amount}}</td>
-<td> {{status}}</td>
-<td>
-	<div class=tbl-btn>
-	<button type="button" name="{{id}}" class="editStatus" onclick='makePending("{{id}}")'>Pending</button><br/>
-	<button type="button" name="{{id}}" class="editStatus" onclick='makeConfirmed("{{id}}")'>Confirmed</button><br/>
-	<button type="button" name="{{id}}" class="editStatus" onclick='makeCancelled("{{id}}")'>Cancelled</button><br/>
-	</div>
-</td>
+	<td>{{room.name}}</td>
+	<td> {{fromDate}}</td>
+	<td> {{client.name}}</td>
+	<td> {{amount}}</td>
+	<td> {{status}}</td>
+	<td>
+		<div class=tbl-btn>
+			<button type="button" name="{{id}}" class="editStatus" onclick='makePending("{{id}}")'>Pending</button><br/>
+			<button type="button" name="{{id}}" class="editStatus" onclick='makeConfirmed("{{id}}")'>Confirmed</button><br/>
+			<button type="button" name="{{id}}" class="editStatus" onclick='makeCancelled("{{id}}")'>Cancelled</button><br/>
+		</div>
+	</td>
 </tr>
 {{/.}}

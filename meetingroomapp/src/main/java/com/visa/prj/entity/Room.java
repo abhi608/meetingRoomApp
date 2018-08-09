@@ -27,13 +27,15 @@ public class Room {
 	@Column(name="full_day_price")
 	private double fullDayPrice;
 	
+	private String description;
+	
 	
 	public Room() {
 	}
 
 
 	public Room(int id, String name, int capacity, boolean status, double hourPrice, double halfDayPrice,
-			double fullDayPrice) {
+			double fullDayPrice, String description) {
 		this.id = id;
 		this.name = name;
 		this.capacity = capacity;
@@ -41,6 +43,7 @@ public class Room {
 		this.hourPrice = hourPrice;
 		this.halfDayPrice = halfDayPrice;
 		this.fullDayPrice = fullDayPrice;
+		this.description = description;
 	}
 
 
@@ -111,6 +114,16 @@ public class Room {
 
 	public void setFullDayPrice(double fullDayPrice) {
 		this.fullDayPrice = fullDayPrice;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	

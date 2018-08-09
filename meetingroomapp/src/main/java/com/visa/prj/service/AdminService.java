@@ -215,6 +215,18 @@ public class AdminService {
 			// TODO: handle exception
 		}
 	}
+
+	public List<Room> getActiveRooms() {
+		// TODO Auto-generated method stub
+		try {
+			return roomDao.getActiveRooms();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+		
+		
+	}
 	
 	
 	

@@ -1,0 +1,36 @@
+<h3>Step2 - Book Room</h3>
+ <div class="container">
+ 	<form id="contact">
+	<div class="card">
+	  <img class="card-img-top" src="#" alt="Card image cap">
+	  <div class="card-body">
+	  	<input type="date" name="date" id="reservationDate" value="" required><br/>
+	  	Duration: <select id="selectDuration" onchange="showHour()">
+	  		<option value="0">Hour</option>
+	  		<option value="1">Half Day</option>
+	  		<option value="2">Full Day</option>
+	  	</select>
+	  	<br/>
+	  	<div id="selectHour"></div>
+	  	{{#.}}
+	  	<h3 class="card-text">{{name}}</h3><br/>
+	  	{{/.}}
+	  	
+	  	
+	  </div>
+	</div>
+	</form>
+ </div>
+ <script>
+ 	function showHour(){
+ 		var duration = $("#selectDuration").val();
+ 		if(duration == "0"){
+ 			var selectHour$ = $("#selectHour");
+ 			selectHour$.empty();
+ 			$.get("templates/clientSelectHour.html", function(temp1){
+ 				selectHour$.html(temp1);
+ 				
+ 			});
+ 		}
+ 	}
+ </script>

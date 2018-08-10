@@ -185,6 +185,8 @@ function submitStep4(step){
 				contentType:"application/json",
 				success: function(data){
 					console.log("data: ", data);
+					alert("Booking added Successfully! You'll receive a confirmation mail shortly.");
+					window.location.href = "http://localhost:8080/clientLanding.html?step1";
 				}
 			});
 		}

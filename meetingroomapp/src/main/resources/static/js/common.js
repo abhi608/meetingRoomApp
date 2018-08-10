@@ -197,6 +197,7 @@ function openBookings(evt, cityName){
 	$.get("templates/booking.html",function(templ) {
 		bksTempl$ = templ;
 		$.getJSON("http://localhost:8080/api/upcomingBookings", function(books) {
+			books = books.reverse();
 			for(var i=0; i<books.length; i++){
 				if('status' in books[i]){
 					if(books[i].status==1){
@@ -287,8 +288,8 @@ $(function(){
 			contentType:"application/json",
 			success: function(data){
 				console.log("data: ", data);
-				alert("Booking added Successfully! To confirm it, please go the the bookings menu.")
-				window.location.href = "http://localhost:8080/commonView.html"
+				alert("Booking added Successfully! To confirm it, please go the the bookings menu.");
+				window.location.href = "http://localhost:8080/commonView.html";
 			}
 		});
 	});
@@ -362,7 +363,7 @@ function openDashboard(evt, cityName){
 			$.get(template3, function(temp3){
 				var temp3$ = temp3;
 				$.getJSON("http://localhost:8080/api/dashboard", function(data1){
-					data1.sortedBooking = data1.sortedBooking.slice(0,3);
+					data1.sortedBooking = data1.sortedBooking.slice(data1.sortedBooking.length-3, data1.sortedBooking.length).reverse();
 					for(var i=0; i< data1.sortedBooking.length; i++){
 						console.log("date: ", data1.sortedBooking[i].fromDate);
 						var fromDate = data1.sortedBooking[i].fromDate;
@@ -376,6 +377,7 @@ function openDashboard(evt, cityName){
 					dashboard2$.html(content2);
 					var content3 = Mustache.render(temp3$, {});
 					dashboard3$.html(content3);
+					$("#res").remove();
 					display(evt, cityName);
 				});
 			});

@@ -61,8 +61,11 @@ public class MeetingRoomController {
 			}
 		}
 		
+
 		// If no past booking for this room, then delete the room
 		if(c==0) {
+		// If no booking for this room, then delete the room
+		
 			adminService.deleteRoomById(id);
 			return new ResponseEntity<String>("",HttpStatus.OK);
 		}else {

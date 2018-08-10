@@ -107,7 +107,7 @@ function deleteRoom(id){
 	    url: url,
 	    type: 'DELETE',
 	    success: function(message) {
-	    	if(message == null){
+	    	if(message == ""){
 	    		openRooms(null, "ShowRooms");
 	    	}else{
 	    		alert(message);

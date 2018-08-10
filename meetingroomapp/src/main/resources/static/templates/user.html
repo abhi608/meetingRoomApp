@@ -1,4 +1,6 @@
-<table border="1px solid black">
+
+<table class=tbl border="1px solid black">
+
 <tr>
 	<th>Name</th>
 	<th>Email</th>
@@ -6,18 +8,21 @@
 	<th>Status</th>
 	<th>Options</th>
 </tr>
+
 {{#.}}
-<tr>
+
+<tr class=tbl-content>
 <td>{{name}}</td>
 <td> {{email}}</td>
 <td> {{registrationDate}}</td>
 <td> {{status}}</td>
 <td>
-	<div>
-	<button type="button" name="{{email}}" class="deleteUser" onclick='deleteAdmin("{{email}}")'>Delete</button><br/>
-	<button type="button" name="{{email}}" class="changeUserStatus" onclick='changeAdminStatus("{{email}}")'>Switch Status</button>
+	<div class=tbl-btn>
+	<button type="button" name="{{email}}" class="deleteUser btn btn-primary" onclick='deleteAdmin("{{email}}")'>Delete</button><br/>
+	<button type="button" name="{{email}}" class="changeUserStatus btn btn-primary" onclick='changeAdminStatus("{{email}}")'>Switch</button>
 	</div>
 </td>
 </tr>
 {{/.}}
+
 </table>

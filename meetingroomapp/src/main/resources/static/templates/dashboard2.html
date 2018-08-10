@@ -5,15 +5,15 @@
                                 <hr>
 				{{#sortedBooking}}
                                 <div class="card-text">
-                                        <p>{{room.name}}</p>
+                                		<img class="card-img-top" src="{{room.imgSrc}}" width="400px" height="250px" alt="Card image cap">
+                                        <h4><b>{{room.name}}</b></h4>
                                         <p>Date: {{fromDate}}</p>
                                         <p>{{client.name}}</p>
+                                        
                                 </div>
-				<br/>
-				<br/>
-				<hr>
-				<br/>
-				<br/>
+				
+				<hr style="border-color:black;">
+				
 				{{/sortedBooking}}
                         </div>
               </div>

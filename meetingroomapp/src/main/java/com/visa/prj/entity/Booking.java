@@ -44,14 +44,6 @@ public class Booking {
 	private int type;
 	
 	private double amount;
-	
-	public double getAmount() {
-		return amount;
-	}
-
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
 
 	private int status;
 	
@@ -67,6 +59,13 @@ public class Booking {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date toDate;
 	
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
 
 	public int getId() {
 		return id;

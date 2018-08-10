@@ -16,6 +16,7 @@ import com.visa.prj.dao.ClientDao;
 import com.visa.prj.dao.EquipmentDao;
 import com.visa.prj.dao.LayoutDao;
 import com.visa.prj.dao.RoomDao;
+import com.visa.prj.view.AddBooking;
 import com.visa.prj.entity.Admin;
 import com.visa.prj.entity.Booking;
 import com.visa.prj.entity.Client;
@@ -217,6 +218,64 @@ public class AdminService {
 			// TODO: handle exception
 		}
 	}
+
+	public List<Room> getActiveRooms() {
+		// TODO Auto-generated method stub
+		try {
+			return roomDao.getActiveRooms();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+	
+	@Transactional
+	public void makePending(int id) {
+		Booking b = bookingDao.getOne(id);
+		
+		try {
+			b.setStatus(2);
+		} catch (Exception e) {
+			
+		}
+				
+	}
+	
+	@Transactional
+	public void makeConfirmed(int id) {
+		Booking b = bookingDao.getOne(id);
+		
+		try {
+			b.setStatus(1);
+		} catch (Exception e) {
+			
+		}
+	}
+				
+	public void addNewBooking(AddBooking addBooking) {
+		
+	}
+
+	public Layout getLayoutById(int id) {
+		try {
+			return layoutDao.findById(id).get();
+			}catch(Exception e) {
+				return null;
+		}
+	}
+	
+	@Transactional
+	public void makeCancelled(int id) {
+		Booking b = bookingDao.getOne(id);
+		
+		try {
+			b.setStatus(3);
+		} catch (Exception e) {
+			
+		}
+	}
+				
+
 	
 	@Transactional
 	public void changeRoomStatus(Integer room_id) {

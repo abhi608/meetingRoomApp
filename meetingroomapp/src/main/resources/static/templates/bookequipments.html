@@ -1,0 +1,16 @@
+<tr>
+  			<th>Title</th>
+  			<th>Quantity</th>
+  			<th>Price</th>
+  			<th>Select</th>
+ 	 	</tr>
+
+{{#.}}
+<tr class="equips2">
+	<td>{{name}}</td>
+	<td> <input type="number" min="0" max="10" step="1" id="equipqty_{{equipId}}" name="{{equipId}}_equipqty"> </td>
+	<td> {{price}} per item</td>
+	<td> <input TYPE=checkbox id="equips" class="equips" name="equips" VALUE={{equipId}}> </td>
+</tr>
+{{/.}}
+

@@ -130,8 +130,9 @@ function changeAdminStatus(email){
         }
     });
 }
-function changeRoomStatus(id){
-	var url = "/api/changeRoomStatus/" + id;
+
+function changeRoomStatus(room_id){
+	var url = "/api/changeRoomStatus/" + room_id;
 	var data = {};
 	console.log(data);
 	$.ajax({
@@ -144,51 +145,177 @@ function changeRoomStatus(id){
         }
     });
 }
+
+function makePending(id){
+	var url = "/api/makePending/" + id;
+	var data = {};
+	console.log(data);
+	$.ajax({
+        type: 'PUT',
+        url: url,
+        data: JSON.stringify(data),
+        contentType:"application/json",
+        success: function (message) {
+        	openBookings(null, "Bookings");
+        }
+    });
+}
+
+function makeConfirmed(id){
+	var url = "/api/makeConfirmed/" + id;
+	var data = {};
+	console.log(data);
+	$.ajax({
+        type: 'PUT',
+        url: url,
+        data: JSON.stringify(data),
+        contentType:"application/json",
+        success: function (message) {
+        	openBookings(null, "Bookings");
+        }
+    });
+}
+
+function makeCancelled(id){
+	var url = "/api/makeCancelled/" + id;
+	var data = {};
+	console.log(data);
+	$.ajax({
+        type: 'PUT',
+        url: url,
+        data: JSON.stringify(data),
+        contentType:"application/json",
+        success: function (message) {
+        	openBookings(null, "Bookings");
+        }
+    });
+}
+
 function openBookings(evt, cityName){
+	
 	var bksTempl$;
 	$.get("templates/booking.html",function(templ) {
 		bksTempl$ = templ;
 		$.getJSON("http://localhost:8080/api/bookings", function(books) {
+			for(var i=0; i<books.length; i++){
+				if('status' in books[i]){
+					if(books[i].status==1){
+						books[i].status = "Confirmed";
+						
+					} else if(books[i].status==2){
+						books[i].status = "Pending";
+					}
+					else{
+						books[i].status = "Cancelled";
+					}
+				}
+			}
 			var content = Mustache.render(bksTempl$, books);
+			$('#ModuleUserTable').empty();
 			$('#ModuleUserTable').append(content);
 			display(evt, cityName);
 		
 		});
 	 });
 }
+$(function(){
+	$("#addBookButton").click(function(event) {
+		event.preventDefault();
+		
+		var addBooking = {};
+		var json = {};
+		var eqipIds=[];
+		var equipqty=[];
+		addBooking["username"]=$("#username").val();
+		addBooking["useremail"]=$("#useremail").val();
+		addBooking["userphone"]=$("#userphone").val();
+		addBooking["useraddress"]=$("#useraddress").val();
+		addBooking["tbdate"]=$("#tbdate").val();
+		addBooking["type"]=$("#type").val();
+		addBooking["slot"]=$("#slot").val();
+		addBooking["fromtime"]=$("#fromtime").val();
+		addBooking["totime"]=$("#totime").val();
+		addBooking["room"]=$("#room").val();
+		addBooking["layout"]=$("#layout").val();
+		
+		
+		$('.equips').each(function(){
+	        if($(this).is(':checked'))
+	        {
+	            console.log("hua");
+	            var equipId = $(this).attr('VALUE');
+	            eqipIds.push(equipId);
+	            
+	            var id = "#equipqty_" + equipId;
+	            console.log($(id));
+	            var id$ = $(id).val();
+	            equipqty.push(id$);
+	        	//addBooking.push({value:$(this).attr('VALUE')}); 
+	        }        
+	    });
+		addBooking["equipmentIds"]=eqipIds;
+		addBooking["equipmentQty"]=equipqty;
+		console.log(eqipIds);
+		console.log(equipqty);
+		
+		console.log(JSON.stringify(addBooking));
+		
+		$.ajax({
+			url: "http://localhost:8080/api/addbook",
+			type: "POST",
+			data: JSON.stringify(addBooking),
+			contentType:"application/json",
+			success: function(data){
+				console.log("data: ", data);
+			}
+		});
+	});
+});
 
 function addBooking(evt, cityName){
 	console.log("evt, cityName: ", evt, cityName);
 	var roomTempl$;
 	var layoutTempl$;
-	$.get("templates/layout.html",function(layouttempl) {
+	var equipTempl$;
+	$.get("templates/booklayout.html",function(layouttempl) {
 		layoutTempl$ = layouttempl;
 		$.getJSON("http://localhost:8080/api/layout", function(layouts) {
 			 
 			var content = Mustache.render(layoutTempl$, layouts);
+			$('#layout').empty();
 			$('#layout').append(content);
 			
-			$.get("templates/room.html",function(roomtempl) {
+			$.get("templates/bookroom.html",function(roomtempl) {
 				roomTempl$ = roomtempl;
 				$.getJSON("http://localhost:8080/api/room", function(rooms) {
 					 
 					content = Mustache.render(roomTempl$, rooms);
+					$('#room').empty();
 					$('#room').append(content);
-					display(evt, cityName);
-				
-				});
-			 });
-		
+					$.get("templates/bookequipments.html",function(equiptempl) {
+						equipTempl$ = equiptempl;
+						$.getJSON("http://localhost:8080/api/equipments", function(equipments) {
+							 
+							content = Mustache.render(equipTempl$, equipments);
+							$('#bookEquimentTable').empty();
+							$('#bookEquimentTable').append(content);
+							display(evt, cityName);
+						});
+					});
+				});		
+			});
 		});
-	 });
+	});
 }
 
 function typeCheck(that) {
-    if (that.value == "halfday") {
+	
+    if (that.value == 2) {
+    	console.log("halfday")
         document.getElementById("halfday").style.display = "block";
     	document.getElementById("perhour").style.display = "none";
 		
-    }else if(that.value == "perhour"){
+    }else if(that.value == 1){
         document.getElementById("halfday").style.display = "none";
     	document.getElementById("perhour").style.display = "block";
     }else {
@@ -196,6 +323,8 @@ function typeCheck(that) {
     	document.getElementById("perhour").style.display = "none";
     }
 }
+
+
 
 function openDashboard(evt, cityName){
 	var dashboard1$ = $("#dashboard1");

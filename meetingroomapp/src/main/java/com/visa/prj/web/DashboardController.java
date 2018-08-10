@@ -6,17 +6,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.visa.prj.service.AdminService;
 import com.visa.prj.entity.Booking;
-import com.visa.prj.entity.DashBoard;
+import com.visa.prj.view.DashBoard;
+import com.visa.prj.service.AdminService;
 
 @RestController
 public class DashboardController {
@@ -24,6 +24,10 @@ public class DashboardController {
 	
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired 
+	 private HttpSession ses;
+	
 	@RequestMapping(value="api/dashboard",method=RequestMethod.GET)
 	public DashBoard getDashboard(){
 		DashBoard d=new DashBoard();
@@ -50,11 +54,11 @@ public class DashboardController {
 			System.out.println(d.toString());
 			return  adminService.getBookingByDate(d);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
 		
 		
 	}
+	
 }

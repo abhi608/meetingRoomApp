@@ -17,7 +17,6 @@ import com.visa.prj.entity.Booking;
 import com.visa.prj.entity.Room;
 import com.visa.prj.service.AdminService;
 
-
 @RestController
 public class MeetingRoomController {
 
@@ -33,6 +32,16 @@ public class MeetingRoomController {
 		return adminService.getRooms();
 	}
 	
+	@RequestMapping(value="api/getActiveRooms",method=RequestMethod.GET)
+	public @ResponseBody List<Room> getActiveRooms() {
+		try {
+			return adminService.getActiveRooms();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+		
+	}
 	
 	@RequestMapping(value="api/changeRoomStatus/{id}",method=RequestMethod.PUT)
 	public ResponseEntity<String> updateRoom(@PathVariable("id") Integer id) {

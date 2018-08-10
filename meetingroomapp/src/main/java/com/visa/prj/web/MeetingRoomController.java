@@ -1,5 +1,6 @@
 package com.visa.prj.web;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,9 +52,24 @@ public class MeetingRoomController {
 	@RequestMapping(value="api/room/{id}",method=RequestMethod.DELETE)
 	public ResponseEntity<String> deleteRoom(@PathVariable("id") int id) {
 		List<Booking > bk= bookingDao.getBookingByRoom(id);
+		int c=0;
+		//System.out.println(new Date());
+		for(Booking b:bk) {
+			System.out.println(b.getToDate());
+			System.out.println(new Date());
+			System.out.println(b.getToDate().compareTo(new Date())<0);
+			if((b.getStatus()==1 || b.getStatus()==2) && (b.getToDate().compareTo(new Date())<0)) {
+				
+				c++;
+				break;
+			}
+		}
 		
+
+		// If no past booking for this room, then delete the room
+		if(c==0) {
 		// If no booking for this room, then delete the room
-		if(bk.size()==0) {
+		
 			adminService.deleteRoomById(id);
 			return new ResponseEntity<String>("",HttpStatus.OK);
 		}else {

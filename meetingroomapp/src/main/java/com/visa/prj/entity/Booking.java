@@ -37,7 +37,7 @@ public class Booking {
 	@JoinColumn(name="layout_fk")
 	private Layout layout;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="client_fk")
 	private Client client;
 	

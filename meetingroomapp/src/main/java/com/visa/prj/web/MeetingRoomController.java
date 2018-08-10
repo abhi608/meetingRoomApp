@@ -55,7 +55,11 @@ public class MeetingRoomController {
 		int c=0;
 		//System.out.println(new Date());
 		for(Booking b:bk) {
+			System.out.println(b.getToDate());
+			System.out.println(new Date());
+			System.out.println(b.getToDate().compareTo(new Date())<0);
 			if((b.getStatus()==1 || b.getStatus()==2) && (b.getToDate().compareTo(new Date())<0)) {
+				
 				c++;
 				break;
 			}

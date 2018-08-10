@@ -19,9 +19,9 @@ insert into clients (email,address,name,phone_number) values ('tanya@visa.com','
 insert into clients (email,address,name,phone_number) values ('mansi@visa.com','Mumbai','Mansi Entity',777777);
 insert into clients (email,address,name,phone_number) values ('ayush@visa.com','Kolkata','Ayush Master',888888);
 
-insert into bookings (booking_date,from_date,status,to_date,type,client_fk,layout_fk,room_fk,amount) values ('2018-08-07 07:34:09','2018-08-07 10:00:00',1,'2018-08-07 13:00:00',1,1,1,1,1000);
+insert into bookings (booking_date,from_date,status,to_date,type,client_fk,layout_fk,room_fk,amount) values ('2018-08-15 07:34:09','2018-08-1 10:00:00',1,'2018-08-15 13:00:00',1,1,1,1,1000);
 insert into bookings (booking_date,from_date,status,to_date,type,client_fk,layout_fk,room_fk,amount) values ('2018-08-06 19:59:09','2018-08-07 15:00:00',1,'2018-08-07 18:00:00',1,3,2,2,15000);
-insert into bookings (booking_date,from_date,status,to_date,type,client_fk,layout_fk,room_fk,amount) values ('2018-08-07 07:39:09','2018-08-08 10:00:00',2,'2018-08-07 14:00:00',2,2,3,3,20000);
+insert into bookings (booking_date,from_date,status,to_date,type,client_fk,layout_fk,room_fk,amount) values ('2018-08-16 07:39:09','2018-08-17 10:00:00',2,'2018-08-17 14:00:00',2,2,3,3,20000);
 
 insert into equipment_line_items (amount,quantity,equipment_fk,booking_fk) values (200,2,1,1);
 insert into equipment_line_items (amount,quantity,equipment_fk,booking_fk) values (200,1,2,1);

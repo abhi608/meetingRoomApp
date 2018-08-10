@@ -21,6 +21,7 @@
   <button class="tablinks" onclick="openUsers(event, 'Users')" id="usersTab">Users</button>
 </div>
 
+
 <div id="Dashboard" class="tabcontent">
 	<div class="container" id="dashboard1"></div>
 
@@ -52,9 +53,15 @@
    
 </div> 
 
+
 <div id="BookRoom" class="tabcontent">
-  <h3>Book a room</h3>
-  <form>
+  <div class=tbl-title><h3>Book a room</h3></div>
+  <div class="col-md-3">
+  </div>
+  
+  <div class="col-md-6">
+  <form id="contact">
+   
 	<label> Date: <input type="date" id="tbdate" name="tbdate" placeholder="tbdate"> </label> <br/>
 	<label> Type: 
 		<select onchange="typeCheck(this);" id="type" name="type">
@@ -88,22 +95,20 @@
     	<select id="layout" name="layout">
     	</select>
     </label>
-    
-    <h2> Chose Equipments</h2>
- 	<table id = "bookEquimentTable"  border="1px solid black">
- 	</table>
- 	
- 	<h2> User Details </h2>
- 	
- 	<label> Email: <input type="text" id="useremail" name="useremail"></label> <br/>
- 	<label> Name: <input type="text" id="username" name="username"></label><br/>
- 	<label> Phone: <input type="text" id="userphone" name="userphone"></label><br/>
- 	<label> Address: <input type="text" id="useraddress" name="useraddress"></label><br/>
- 	
+     <h4> Chose Equipments</h4>
+ 	<table class = tbl id = "bookEquimentTable"  border="1px solid black">
+ 	</table>	
+ 
+
+ 	<label> Email: <input type="text" id="useremail" name="useremail"></label>
+ 	 <label> Name:<input type="text" id="username" name="username"></label>
+ 	<label> PhoneNo.:<input type="text" id="userphone" name="userphone" ></label>
+ 	<label> Address:<input type="text" id="useraddress" name="useraddress" ></label>	
  	
  	<button type="submit" id="addBookButton">Add Booking</button>
  	
   </form>
+  </div>
 </div>
 
 <div id="Users" class="tabcontent">

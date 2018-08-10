@@ -209,6 +209,11 @@ function openBookings(evt, cityName){
 						books[i].status = "Cancelled";
 					}
 				}
+				var fromDate = books[i].fromDate;
+				fromDate = new Date(fromDate);
+				var newDate = fromDate.getDate()+"-"+fromDate.getMonth()+"-"+fromDate.getFullYear()+
+								"/"+fromDate.getHours()+":"+fromDate.getMinutes();
+				books[i].fromDate = newDate;
 			}
 			var content = Mustache.render(bksTempl$, books);
 			$('#ModuleUserTable').empty();
@@ -340,6 +345,13 @@ function openDashboard(evt, cityName){
 			$.get(template3, function(temp3){
 				var temp3$ = temp3;
 				$.getJSON("http://localhost:8080/api/dashboard", function(data1){
+					for(var i=0; i< data1.sortedBooking.length; i++){
+						console.log("date: ", data1.sortedBooking[i].fromDate);
+						var fromDate = data1.sortedBooking[i].fromDate;
+						fromDate = new Date(fromDate);
+						var newDate = fromDate.getDate()+"-"+fromDate.getMonth()+"-"+fromDate.getFullYear();
+						data1.sortedBooking[i].fromDate = newDate;
+					}
 					var content1 = Mustache.render(temp1$, data1);
 					dashboard1$.html(content1);
 					var content2 = Mustache.render(temp2$, data1);

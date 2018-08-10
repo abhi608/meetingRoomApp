@@ -3,6 +3,8 @@ package com.visa.prj.web;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -18,7 +20,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.visa.prj.view.AddBooking;
+
+
+
 import com.visa.prj.entity.Booking;
+import com.visa.prj.entity.Client;
+import com.visa.prj.entity.Equipment;
+import com.visa.prj.entity.EquipmentLineItem;
 import com.visa.prj.entity.Layout;
 import com.visa.prj.entity.Room;
 import com.visa.prj.service.AdminService;
@@ -72,11 +80,22 @@ public class BookingController {
 		//hourly=1
 		//halfday=2 //fullday=3
 		
+		double amount=0;
+		
 		Date fromDate;
 		Date toDate;
 		int type = Integer.parseInt(addBooking.getType());
 		booking.setType(type);
 		booking.setBookingDate(new Date());
+		booking.setStatus(2);
+		String roomId= addBooking.getRoom();
+		String layoutId = addBooking.getLayout();
+		
+		Room room = adminService.getRoomById(Integer.parseInt(roomId));
+		Layout layout = adminService.getLayoutById(Integer.parseInt(layoutId));
+		
+		booking.setRoom(room);
+		booking.setLayout(layout);
 		
 		
 		String justDate = addBooking.getTbdate();
@@ -85,6 +104,7 @@ public class BookingController {
 		if(type==1) {
 			fromTime = addBooking.getFromtime();
 			toTime = addBooking.getTotime();
+			
 		}else if (type==2) {
 			String slot= addBooking.getSlot();
 			if(slot.equals("morning")){
@@ -94,9 +114,11 @@ public class BookingController {
 				fromTime="14:00";
 				toTime="18:00";
 			}
+			amount=amount+room.getHalfDayPrice();
 		}else {
 			fromTime="09:00";
 			toTime="18:00";
+			amount=amount+room.getFullDayPrice();
 		}
 		
 		
@@ -110,31 +132,52 @@ public class BookingController {
 			toDate = format.parse(toDatestr);
 			booking.setFromDate(fromDate);
 			booking.setToDate(toDate);
+			long secs = (toDate.getTime() - fromDate.getTime()) / 1000;
+			int hours =  (int) Math.ceil(secs/3600);
+			if(type==1) {
+				amount=amount+hours*room.getHourPrice();
+			}
 			
-			System.out.println(fromDate);
+			System.out.println(hours);
 			System.out.println(toDate);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		
-		booking.setStatus(2);
-		String roomId= addBooking.getRoom();
-		String layoutId = addBooking.getLayout();
-		
-		Room room = adminService.getRoomById(Integer.parseInt(roomId));
-		Layout layout = adminService.getLayoutById(Integer.parseInt(layoutId));
-		
-		booking.setRoom(room);
-		booking.setLayout(layout);
 		
 		
 		
+		Client client = new Client();
+		client.setAddress(addBooking.getUseraddress());
+		client.setEmail(addBooking.getUseremail());
+		client.setName(addBooking.getUsername());
+		client.setPhoneNumber(Integer.parseInt(addBooking.getUserphone()));
+		
+		booking.setClient(client);
 		
 		
 		
+		/*******equipments addition************/
+		List<String> equipIds=addBooking.getEquipmentIds();
+		List<String> equipQty=addBooking.getEquipmentQty();
+		List<EquipmentLineItem> equipmentLineItems = new ArrayList<>();
+		for(int i=0; i< equipIds.size();i++) {
+			EquipmentLineItem e =new EquipmentLineItem();
+			Equipment eq = adminService.getEquipmentById(Integer.parseInt(equipIds.get(i)));
+			
+			eq.setQuantity(eq.getQuantity()-Integer.parseInt(equipQty.get(i)));
+			
+			amount= amount + Integer.parseInt(equipQty.get(i))*(eq.getPrice());
+			e.setEquipment(eq);
+			e.setQuantity(Integer.parseInt(equipQty.get(i)));
+			e.setAmount(Integer.parseInt(equipQty.get(i))*(eq.getPrice()));
+			equipmentLineItems.add(e);
+			
+		}
 		
-		/**************************************/
-		
+		booking.setAmount(amount);
+		booking.setEquipLineItem(equipmentLineItems);
+		adminService.addBooking(booking);
 		
 		
 		return new ResponseEntity<String>("SUCCESS==TRUE",HttpStatus.CREATED);

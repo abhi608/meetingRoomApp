@@ -264,6 +264,14 @@ public class AdminService {
 		}
 	}
 	
+	public Equipment getEquipmentById(int id) {
+		try {
+			return equipmentDao.findById(id).get();
+			}catch(Exception e) {
+				return null;
+		}
+	}
+	
 	@Transactional
 	public void makeCancelled(int id) {
 		Booking b = bookingDao.getOne(id);

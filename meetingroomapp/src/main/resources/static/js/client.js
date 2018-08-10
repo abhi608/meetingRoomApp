@@ -40,7 +40,7 @@ $(function() {
     	console.log("Inside step2");
     	var template1 = "templates/clientStep2.html";
 	    var rooms$ = $("#step"); 
-	    var roomName = query[1];
+	    var roomName = decodeURIComponent(query[1]);
 	    $.get(template1, function(temp1){
 	    	var temp1$ = temp1;
 	    	var content1 = Mustache.render(temp1$, {"roomName": roomName});

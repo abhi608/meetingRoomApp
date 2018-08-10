@@ -254,7 +254,7 @@ $(function(){
 		}
 		
 		
-		if(key.length > 0){
+		if(emptyFields != ""){
 			emptyFields = emptyFields.slice(0, -2);
 			alert("Make sure all the following fields are filled: " + emptyFields);
 			return;
@@ -271,7 +271,6 @@ $(function(){
 	            console.log($(id));
 	            var id$ = $(id).val();
 	            equipqty.push(id$);
-	        	//addBooking.push({value:$(this).attr('VALUE')}); 
 	        }        
 	    });
 		addBooking["equipmentIds"]=eqipIds;
@@ -288,6 +287,8 @@ $(function(){
 			contentType:"application/json",
 			success: function(data){
 				console.log("data: ", data);
+				alert("Booking added Successfully! To confirm it, please go the the bookings menu.")
+				window.location.href = "http://localhost:8080/commonView.html"
 			}
 		});
 	});

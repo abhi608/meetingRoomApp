@@ -227,6 +227,7 @@ $(function(){
 	$("#addBookButton").click(function(event) {
 		event.preventDefault();
 		
+		
 		var addBooking = {};
 		var json = {};
 		var eqipIds=[];
@@ -243,6 +244,21 @@ $(function(){
 		addBooking["room"]=$("#room").val();
 		addBooking["layout"]=$("#layout").val();
 		
+		var toCheck = ["username", "useremail", "userphone", "useraddress", "tbdate"];
+		var emptyFields = "";
+		
+		for(key of toCheck){
+			if(addBooking[key] == null || addBooking[key] == "" || addBooking[key] == undefined){
+				emptyFields += key + ", ";
+			}
+		}
+		
+		
+		if(key.length > 0){
+			emptyFields = emptyFields.slice(0, -2);
+			alert("Make sure all the following fields are filled: " + emptyFields);
+			return;
+		}
 		
 		$('.equips').each(function(){
 	        if($(this).is(':checked'))
@@ -345,6 +361,7 @@ function openDashboard(evt, cityName){
 			$.get(template3, function(temp3){
 				var temp3$ = temp3;
 				$.getJSON("http://localhost:8080/api/dashboard", function(data1){
+					data1.sortedBooking = data1.sortedBooking.slice(0,3);
 					for(var i=0; i< data1.sortedBooking.length; i++){
 						console.log("date: ", data1.sortedBooking[i].fromDate);
 						var fromDate = data1.sortedBooking[i].fromDate;

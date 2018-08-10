@@ -55,7 +55,7 @@
 <div id="BookRoom" class="tabcontent">
   <h3>Book a room</h3>
   <form>
-	<label> Date: <input type="date" id="tbdate" name="tbdate" placeholder="tbdate"> </label> <br/>
+	<label> Date: <input type="date" id="tbdate" name="tbdate" placeholder="tbdate" required> </label> <br/>
 	<label> Type: 
 		<select onchange="typeCheck(this);" id="type" name="type">
    			<option value=3>Full Day</option>
@@ -101,7 +101,7 @@
  	<label> Address: <input type="text" id="useraddress" name="useraddress"></label><br/>
  	
  	
- 	<button type="submit" id="addBookButton">Add Booking</button>
+ 	<button type="button" id="addBookButton">Add Booking</button>
  	
   </form>
 </div>

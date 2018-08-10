@@ -55,13 +55,22 @@ public class MeetingRoomController {
 		int c=0;
 		//System.out.println(new Date());
 		for(Booking b:bk) {
-			System.out.println(b.getToDate());
-			System.out.println(new Date());
-			System.out.println(b.getToDate().compareTo(new Date())<0);
-			if((b.getStatus()==1 || b.getStatus()==2) && (b.getToDate().compareTo(new Date())<0)) {
+//			System.out.println(b.getToDate());
+//			System.out.println(new Date());
+			//System.out.println(b.getFromDate().compareTo(new Date())>0);
+			
+			//cannot delete the room
+			
+			//future booking
+			if((b.getFromDate().compareTo(new Date())>0)) {
+					
+				//active or pending -> cannot delete
+					if(b.getStatus()==1 || b.getStatus()==2) {
 				
-				c++;
-				break;
+							c++;
+							break;
+						}
+			
 			}
 		}
 		
@@ -76,4 +85,4 @@ public class MeetingRoomController {
 			return new ResponseEntity<String>("Room cannot be deleted as it has bookings present !!!",HttpStatus.OK);
 		}
 	}
-}
+	}

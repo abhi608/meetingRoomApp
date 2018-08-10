@@ -25,4 +25,7 @@ public interface BookingDao extends JpaRepository<Booking, Integer> {
 	@Query("SELECT b FROM Booking b JOIN b.room r where r.id= :id ")
 	List<Booking> getBookingByRoom(@Param ("id") Integer id);
 
+	@Query("SELECT b from Booking b WHERE b.toDate > :date")
+	List<Booking> getBookingsAfterDate(@Param("date") Date date);
+
 }

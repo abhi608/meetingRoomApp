@@ -35,6 +35,12 @@ public class BookingController {
 		return adminService.getAllBookings();
 	}
 	
+	@RequestMapping(value="api/upcomingBookings",method=RequestMethod.GET)
+	public @ResponseBody List<Booking> getUpcomingBookings() {
+		System.out.println(adminService.getUpcomingBookings());
+		return adminService.getUpcomingBookings();
+	}
+	
 	@RequestMapping(value="api/room",method=RequestMethod.GET)
 	public @ResponseBody List<Room> getRooms(){
 		return adminService.getRooms();

@@ -196,7 +196,7 @@ function openBookings(evt, cityName){
 	var bksTempl$;
 	$.get("templates/booking.html",function(templ) {
 		bksTempl$ = templ;
-		$.getJSON("http://localhost:8080/api/bookings", function(books) {
+		$.getJSON("http://localhost:8080/api/upcomingBookings", function(books) {
 			for(var i=0; i<books.length; i++){
 				if('status' in books[i]){
 					if(books[i].status==1){

@@ -79,6 +79,15 @@ public class AdminService {
 			return null;
 		}
 	}
+	
+	public List<Booking> getUpcomingBookings() {
+		try {
+			Date date = new Date();
+			return bookingDao.getBookingsAfterDate(date);
+		} catch (Exception e) {
+			return null;
+		}
+	}
 		
 	@Transactional
 	public void addBooking(Booking booking) {
@@ -298,6 +307,8 @@ public class AdminService {
 		}
 		
 	}
+
+	
 	
 	
 	
